@@ -58,8 +58,7 @@ public class AccountServiceImpl implements AccountService
 	@Override
 	public AccountDto depositAmount(Long id, double amount) 
 	{
-		Account account=arepo.findById(id)
-				.orElseThrow(() -> new AccountException("Account with id "+ id +" does not exist in DB"));
+		Account account=arepo.findById(id).orElseThrow(() -> new AccountException("Account with id "+ id +" does not exist in DB"));
 		
 		double total = account.getBalance() + amount;
 		account.setBalance(total);
