@@ -1,0 +1,88 @@
+<!DOCTYPE html> <!-- BOOTSTRAP VERSION 5.0.2-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{corelayout}">
+	
+<body>
+	
+	<div layout:fragment="content">
+		
+		<div class="container">
+			
+				<div class="row">
+					<h1>List of Students</h1>
+				</div>
+				<br />
+				
+				 <!--  ------------------------- FLASH ATTRIBUTE Message displayed here START  -------------------------  -->
+      			  
+      			  <div th:if="${resultMsg != null}" id="toastContainer" th:attr="data-message=${resultMsg}">	 </div>
+      			  
+				 <!--  ------------------------- FLASH ATTRIBUTE Message displayed here END  -------------------------  -->
+				
+				<table class="table table-striped table-hover table-bordered">
+					<thead class="table-dark">
+						<tr>
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Email</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody th:switch="${#lists.isEmpty(students)}">
+							 
+							 <tr th:case="true"> <!--  If empty -> True condition-> No Record found -->
+            						<td colspan="4" class="text-center">No records found</td>
+       						 </tr>
+       						 <div th:case="false">
+       						 
+								<tr  th:each="s : ${students}">  <!--  If not empty -> False condition-> Display Records-->
+										<td th:text="${s.firstName}"></td>
+										<td th:text="${s.lastName}"></td>
+										<td th:text="${s.email}"></td>
+										<td>
+											<a class="btn btn-primary" th:href="@{/students/{studentId}/edit(studentId=${s.id})}">Edit</a>
+	               							<a class="btn btn-danger" onclick="return confirm('Do you want to delete the employee')"  th:href="@{/students/{studentId}/delete(studentId=${s.id})}">Delete</a>
+											<a class="btn btn-info" th:href="@{/students/{studentId}/view(studentId=${s.id})}">View</a>
+										</td>
+								</tr>
+							
+							</div>
+					</tbody>
+				</table>
+				
+		</div>
+		
+	</div>
+	
+<th:block layout:fragment="script">
+	<script type="module">
+			import { toastManager } from './admin/custom/js/utilities_js/toastManager.js';
+						
+			  document.addEventListener('DOMContentLoaded', () => 
+			  {
+			    const toastContainer = document.getElementById('toastContainer');
+			    const message = toastContainer.getAttribute('data-message');
+			    if(message !== '')
+			    {
+					 if (message === 'User Details saved successfully.') 
+					 {
+					      toastManager(message, 'bg-success');
+					 }
+					 /*else if (message.includes("User Details with id= "))*/
+					 else if(message.includes("The User with ID= "))//Remember includes is case sensitive
+				     {
+						toastManager(message,'bg-info');
+					 }
+					 else
+					 {
+						 toastManager(message);  //-->This one will be executed
+					 }
+				}
+			   
+			  });
+	</script>
+</th:block>
+
+</body>
+</html>
