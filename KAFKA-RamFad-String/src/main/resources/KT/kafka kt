@@ -1,0 +1,19 @@
+
+1.
+
+#Consumer Properties:
+#-------------------------------
+#spring.kafka.consumer.bootstrap-servers: Specifies the Kafka broker address.
+#spring.kafka.consumer.group-id: Defines the consumer group ID.
+#spring.kafka.consumer.auto-offset-reset: Sets the offset reset policy. "earliest" means starting from the beginning of the topic.
+#spring.kafka.consumer.key-deserializer: Deserializer for the key.
+#spring.kafka.consumer.value-deserializer: Deserializer for the value.
+
+#Producer Properties:
+#------------------------------
+#spring.kafka.producer.bootstrap-servers: Specifies the Kafka broker address.
+#spring.kafka.producer.key-serializer: Serializer for the key.
+#spring.kafka.producer.value-serializer: Serializer for the value.
+
+
+#------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

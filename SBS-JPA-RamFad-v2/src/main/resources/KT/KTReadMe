@@ -1,0 +1,184 @@
+##################################################################################################################################################
+1. Please explain Spring data annotations: @Table, @Column,@GeneratedValue,@Unique??
+
+Ans:
+1.1 @Table:
+The @Table annotation specifies the primary table for the annotated entity.
+ If you don't use the @Table annotation, Hibernate will assume that the table name is the same as the entity name.
+
+1.2 @Column:
+The @Column annotation is used to specify the details of the column to which a field will be mapped.
+ It is used to provide additional information about the column such as its name, whether it is nullable, its length, etc.
+
+1.3 @GeneratedValue:
+The @GeneratedValue annotation is used to specify how the primary key should be generated. It is commonly used with the @Id annotation.
+
+1.4 @Unique:
+The @Unique annotation is not a standard JPA annotation but is often used as part of the @Column annotation to enforce a uniqueness constraint on a database column.
+ Instead of @Unique, you usually use the unique attribute within @Column.
+ 
+ SUMMARY:
+ Summary
+@Table: Specifies the table associated with an entity.
+@Column: Defines the properties of a column in the table.
+@GeneratedValue: Indicates that the value of the primary key should be automatically generated.
+unique (within @Column): Ensures that the column value is unique across all rows in the table.
+
+These annotations are part of the JPA (Java Persistence API) and are used to map Java classes to database tables,
+ allowing for object-relational mapping (ORM) in Spring Data JPA and Hibernate.
+ 
+  
+##################################################################################################################################################
+2. Please explain Primary key generation strategies: AUTO, IDENTITY, SEQUENCE and TABLE?? 
+(Refer Video: 25 of Ramesh Fadatare Course: Master Spring Data JPA with Hibernate: E-Commerce Project)
+
+Ans:
+2.1 AUTO:
+The AUTO strategy lets the persistence provider (e.g., Hibernate) choose the appropriate strategy for the specific database. 
+It’s the default strategy if no other strategy is specified. Typically, the provider uses a SEQUENCE for databases that support sequences (like PostgreSQL) 
+and IDENTITY for databases that support identity columns (like MySQL).
+
+E.g:
+@Entity
+public class Student {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    // Fields, getters, and setters
+}
+
+2.2 IDENTITY:
+The IDENTITY strategy relies on an auto-incremented database column. 
+The database automatically generates a new value for the primary key for each new row. This strategy is commonly used with databases like MySQL.
+
+E.g:
+@Entity
+public class Student {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    // Fields, getters, and setters
+}
+
+2.3 SEQUENCE:
+The SEQUENCE strategy uses a database sequence to generate unique primary key values. This strategy is commonly used with databases like Oracle and PostgreSQL.
+ You can define a sequence in the database and specify it in the @SequenceGenerator annotation.
+
+E.g:
+@Entity
+@SequenceGenerator(name = "student_seq", sequenceName = "student_sequence", allocationSize = 1)
+public class Student {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_seq")
+    private Long id;
+
+    // Fields, getters, and setters
+}
+
+In this example, the student_sequence sequence is used to generate primary key values for the Student entity. 
+The allocationSize parameter specifies how many sequence values to allocate at once, which can help improve performance 
+by reducing the number of times the database needs to be accessed to get a new sequence value.
+
+2.4. TABLE:
+The TABLE strategy uses a special table in the database to generate unique primary key values. 
+This strategy is less commonly used because it can be slower than other strategies,  but it is useful if you need a database-agnostic approach
+ or if your database does not support sequences or identity columns.
+
+E.g:
+@Entity
+@TableGenerator(name = "student_gen", table = "id_gen", pkColumnName = "gen_name", valueColumnName = "gen_val", allocationSize = 1)
+public class Student {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "student_gen")
+    private Long id;
+
+    // Fields, getters, and setters
+}
+
+In this example, the id_gen table is used to generate primary key values for the Student entity. 
+The pkColumnName specifies the name of the column that stores the names of the generated value types (e.g., "student_gen"), 
+and the valueColumnName specifies the name of the column that stores the actual generated values.
+
+Summary
+---------------
+AUTO: The persistence provider chooses the appropriate strategy based on the database.
+IDENTITY: Relies on auto-incremented database columns for generating primary key values.
+SEQUENCE: Uses a database sequence to generate primary key values.
+TABLE: Uses a special table in the database to generate primary key values.
+
+##################################################################################################################################################
+3. Please explain Hibernate annotation: @CreationTimeStamp , @UpdateTimeStamp
+
+Ans:
+
+3.1 @CreationTimestamp:
+The @CreationTimestamp annotation is used to automatically populate the annotated field with the timestamp of when the entity was created. 
+It is typically used with a Date or LocalDateTime field to record the creation time of a record.
+
+3.2 @UpdateTimestamp:
+The @UpdateTimestamp annotation is used to automatically update the annotated field with the timestamp of the most recent update to the entity. 
+It is typically used with a Date or LocalDateTime field to record the last modification time of a record.
+
+##################################################################################################################################################
+4. Please explain Lombok:
+
+Ans:
+Lombok is a Java library that helps reduce boilerplate code by generating common methods like getters, setters, constructors, equals, hashCode, 
+and toString methods at compile time. By using Lombok annotations, you can simplify your Java classes and make them more readable and maintainable. 
+Here's an overview of some of the most commonly used Lombok annotations:
+
+4.1 @Getter and @Setter:
+These annotations generate getter and setter methods for the fields of a class.
+
+4.2 @ToString:
+The @ToString annotation generates a toString method that includes the class name and each field.
+
+4.3 @EqualsAndHashCode:
+The @EqualsAndHashCode annotation generates equals and hashCode methods.
+
+4.4 @NoArgsConstructor, @AllArgsConstructor, and @RequiredArgsConstructor:
+
+These annotations generate constructors.
+@NoArgsConstructor: Generates a no-argument constructor.
+@AllArgsConstructor: Generates a constructor with one argument for each field.
+@RequiredArgsConstructor: Generates a constructor for final fields and fields marked with @NonNull
+
+4.5 @Data:
+The @Data annotation is a shortcut that combines @Getter, @Setter, @ToString, @EqualsAndHashCode, and @RequiredArgsConstructor into a single annotation.
+
+4.6 @Builder:
+The @Builder annotation provides a builder pattern implementation for your class.
+
+Summary:
+---------------
+Lombok helps reduce boilerplate code in Java by automatically generating common methods and constructors. 
+Some of the most commonly used Lombok annotations include:
+
+@Getter and @Setter: Generate getters and setters.
+@ToString: Generates a toString method.
+@EqualsAndHashCode: Generates equals and hashCode methods.
+@NoArgsConstructor, @AllArgsConstructor, and @RequiredArgsConstructor: Generate constructors.
+@Data: Combines multiple annotations into one.
+@Builder: Provides a builder pattern implementation.
+
+##################################################################################################################################################
+
+ProductRepo -> JpaRepository -> PagingAndSortingRepository -> CrudRepository
+
+
+
+
+
+
+
+
+
+
+
+
