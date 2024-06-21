@@ -48,7 +48,13 @@ This will teach you how to handle inconsistent data (Rollback) if there is data 
 - **Course: ** Apache Kafka and Springboot - The Practical Guide
 - **FileName: ** KAFKA-RamFad-Json
 
+## 10.KAFKA Wikimedia Multi Modal Project
+- **Course: ** Apache Kafka and Springboot - The Practical Guide
+- **FileName: ** KAFKA-RamFad-Wikimedia
 
+### Description:
+- KAFKA-RamFad-WikiMedia-Producer ( Fetches the data from wikimedia and store it in Topic->wikimedia_recentchange )
+- KAFKA-RamFad-Consumer-DB ( Fetches the data from Topic->wikimedia_recentchange and store it in DB->Mysql)
 
 
 
