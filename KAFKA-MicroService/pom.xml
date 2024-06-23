@@ -1,0 +1,16 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>kw.kng</groupId>
+  <artifactId>KAFKA-MicroService</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>KAFKA-MicroService</name>
+  
+  <modules>
+		<module>KAFKA-Order-Service</module>
+		<module>KAFKA-Stock-Service</module>
+		<module>KAFKA-Email-Service</module>
+		<module>KAFKA-Base-Domain</module>
+  </modules>
+  
+</project>

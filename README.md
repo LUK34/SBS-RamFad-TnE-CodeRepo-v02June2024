@@ -57,6 +57,12 @@ This will teach you how to handle inconsistent data (Rollback) if there is data 
 - KAFKA-RamFad-Consumer-DB ( Fetches the data from Topic->wikimedia_recentchange and store it in DB->Mysql)
 
 
+## 11.KAFKA Microservice
+- **Course: ** Apache Kafka and SpringBoot - The Practical Guide
+- **FileName: ** KAFKA-Base-Domain,KAFKA-Email-Service,KAFKA-Order-Service,KAFKA-Stock-Service
+-KAFKA-Order-Service (Producer Microservice, Port:8080)
+-KAFKA-Stock-Service (Consumer Microservice, Port:8084)
+-KAFKA-Email-Service (Consumer Microservice, Port:8085)
 
 
 

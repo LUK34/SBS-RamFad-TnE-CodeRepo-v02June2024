@@ -1,0 +1,76 @@
+* Refer Video 6 of Ramesh Fadatare Course:
+* The below commands is executed in Windows OS.
+
+
+1. Download Kafka from their official website.
+
+2. After downloading Kafka. Extract the file. Keep the name of the file downloaded as simple as possible. Rename the file as `Kafka`.
+
+3. For simplicity sake. Keep the `Kafka` folder in C DRIVE. (Very crucial step for `Kafka` to work)
+
+4. Inorder to start Kafka. First start zookeeper service. (Inside Kafka, C:\kafka) (NEW CMD PROMPT -> CMD PROMPT 1)
+	4.1 Open the Kafka folder in C drive.
+	4.2 Open CMD 
+	4.3 Type the below command:
+	    CMD: .\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
+
+5. After doing step 4. Start Kafka Broker Service. (NEW CMD PROMT -> CMD PROMPT 2)
+	5.1 Go to the same folder.
+	5.2 Open a new CMD. (Inside Kafka, C:\kafka)
+	5.3 Type the below command:
+	    CMD: .\bin\windows\kafka-server-start.bat .\config\server.properties
+	5.4 If you see port 9092. It means that the port Kafka is executed successfully.
+
+6. After doing step 5. Create a topic to store your events. (NEW CMD PROMPT -> CMD PROMPT 3)
+	6.1 Go to the same folder.
+	6.2 Open a new CMD. (Inside Kafka, C:\kafka)
+	6.3 Type the below command:
+	    CMD: .\bin\windows\kafka-topics.bat --create --topic topic_demo --bootstrap-server localhost:9092
+
+7. After doing Step 6. In the same command prompt. Write some events into the topic (CMD PROMPT 3)
+	CMD: .\bin\windows\kafka-console-producer.bat --topic topic_demo --bootstrap-server localhost:9092
+
+e.g: .\bin\windows\kafka-topics.bat --create --topic javaguides_json --bootstrap-server localhost:9092
+e.g: .\bin\windows\kafka-topics.bat --create --topic wikimedia_recentchange --bootstrap-server localhost:9092
+e.g: .\bin\windows\kafka-topics.bat --create --topic order_topics --bootstrap-server localhost:9092
+
+8. A prompt will appear. Write as many events as you want by clicking `Enter`. If you want to exit. `ctrl` +`c`. Say `y`. (CMD PROMPT 3)
+	>hello world
+	>topic demo
+
+
+9. To read events from Kafka topic. In the same CMD prompt write the below code.
+	9.1 CMD: .\bin\windows\kafka-console-consumer.bat --topic topic_demo --from-beginning --bootstrap-server localhost:9092
+
+e.g: .\bin\windows\kafka-console-consumer.bat --topic javaguides_json --from-beginning --bootstrap-server localhost:9092
+e.g: .\bin\windows\kafka-console-consumer.bat --topic wikimedia_recentchange --from-beginning --bootstrap-server localhost:9092
+e,g: .\bin\windows\kafka-console-consumer.bat --topic order_topics --from-beginning --bootstrap-server localhost:9092
+
+10. Give it few second. You will see the events displayed.
+
+
+11. For the consumer to access the data from topic. Open a new command prompt and execute the below command
+
+For the current setup in system. For String:
+CMD:
+.\bin\windows\kafka-console-consumer.bat --topic javaguides --from-beginning --bootstrap-server localhost:9092
+
+For the current setup in system. For String:
+CMD:
+.\bin\windows\kafka-console-consumer.bat --topic javaguides_json --from-beginning --bootstrap-server localhost:9092
+
+
+Note: `javaguides` is the topic to store the events.
+
+KAFKA-Order-Service (Producer Microservice, Port:8080)
+KAFKA-Stock-Service (Consumer Microservice, Port:8084)
+KAFKA-Email-Service (Consumer Microservice, Port:8085)
+
+
+
+
+
+
+
+
+
