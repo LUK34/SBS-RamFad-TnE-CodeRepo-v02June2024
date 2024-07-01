@@ -64,6 +64,31 @@ This will teach you how to handle inconsistent data (Rollback) if there is data 
 - KAFKA-Stock-Service (Consumer Microservice, Port:8084)
 - KAFKA-Email-Service (Consumer Microservice, Port:8085)
 
+## 12.MCRSRV-RamFad-Rest-SimpleCRUDv1
+- **Course: ** Build Microservices using Spring Boot 3, Spring Cloud, React, Kafka, RabbitMQ, REST API, Docker & IntelliJ IDEA
+- **FileName: ** MCRSRV-RamFad-Rest-SimpleCRUDv1
+
+### Description:
+- Implemented CRUD Operation via data transfer using DTO and Entity (ModelMapper dependency)
+- Implemented Exception Handling
+- Implemented Validations
+- Implemented SWAGGER (3.x.x -> http://localhost:8080/swagger-ui/index.html)
+
+## 13.MCRSRV-RamFad-Rest-SimpleCRUDv2
+- **Course: ** Build Microservices using Spring Boot 3, Spring Cloud, React, Kafka, RabbitMQ, REST API, Docker & IntelliJ IDEA
+- **FileName: ** MCRSRV-RamFad-Rest-SimpleCRUDv2
+
+### Description:
+- Implemented CRUD Operation via data transfer using DTO and Entity (MapStruct dependency)
+- Implemented Exception Handling
+- Implemented Validations
+- Implemented SWAGGER (3.x.x -> http://localhost:8080/swagger-ui/index.html)
+
+- ModelMapper is easier to use and faster to set up, but MapStruct offers better performance and compile-time safety,
+- making it more suitable for complex and performance-sensitive applications.The choice between the two depends on your specific
+- project requirements and priorities. For best practices, prefer MapStruct for larger, 
+- production-level projects where performance and type safety are crucial, and use ModelMapper for simpler or prototype applications where ease of use is a priority.
+
 
 
 
