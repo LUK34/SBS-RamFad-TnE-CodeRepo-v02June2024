@@ -84,6 +84,9 @@ This will teach you how to handle inconsistent data (Rollback) if there is data 
 - Implemented Validations
 - Implemented SWAGGER (3.x.x -> http://localhost:8080/swagger-ui/index.html)
 
+- https://mapstruct.org/documentation/installation/
+- https://github.com/mapstruct/mapstruct-examples/blob/main/mapstruct-lombok/pom.xml
+
 - ModelMapper is easier to use and faster to set up, but MapStruct offers better performance and compile-time safety,
 - making it more suitable for complex and performance-sensitive applications.The choice between the two depends on your specific
 - project requirements and priorities. For best practices, prefer MapStruct for larger, 
