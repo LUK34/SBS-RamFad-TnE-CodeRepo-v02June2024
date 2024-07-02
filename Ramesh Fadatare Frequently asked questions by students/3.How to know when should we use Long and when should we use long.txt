@@ -1,0 +1,12 @@
+JPA and Hibernate often recommend using wrapper classes like Long for primary keys. This is because they can represent the absence of a value with null, 
+which is more semantically accurate than a default numeric value.
+
+A primitive long has a default value of 0. This means it cannot represent a null value.
+
+However, Java automatically converts between long and Long through a process called boxing and unboxing. 
+It's often a good practice to be consistent in your choice across your application.
+
+To keep consistent across the application, you can use Long wrapper class type.
+
+
+Question discussed thread: https://www.udemy.com/course/building-real-time-rest-apis-with-spring-boot/learn/#questions/16742870/

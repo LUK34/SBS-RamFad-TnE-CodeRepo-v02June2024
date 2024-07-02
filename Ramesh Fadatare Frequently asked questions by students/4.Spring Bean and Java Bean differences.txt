@@ -1,0 +1,100 @@
+------------------------------------------------------------------------------------------------------------------------------------------------------
+A Java Bean is a standard Java class that follows specific conventions: 
+
+* Must have a public default (no-argument) constructor. 
+* Properties are accessed using getter and setter methods. 
+* The class should implement the Serializable interface, making it suitable for persistence. 
+* Typically, a Java Bean should act as a data container rather than contain business logic. While this is not a strict rule, 
+  it's a general convention to separate data representation from business logic.
+
+Example of Java Bean:
+
+public class Student implements Serializable {
+    private String name;
+    private int age;
+
+    // Default constructor
+    public Student() {}
+
+    // Getter and Setter methods
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public int getAge() {
+        return age;
+    }
+    public void setAge(int age) {
+        this.age = age;
+    }
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Spring Bean :
+--------------
+
+A Spring Bean is an object managed by the Spring IoC (Inversion of Control) container. Here's what differentiates it:
+
+* Managed by Spring: The Spring container is responsible for the lifecycle and configuration of the bean.
+
+* Scope: While a Java Bean's lifecycle is typically managed by the developer, a Spring Bean's lifecycle is managed by the Spring container. It can be a singleton, prototype, and more. 
+
+* Configuration: Can be configured using XML, Java annotations, or Java configuration. 
+
+e.g:
+import org.springframework.stereotype.Component;
+
+@Component
+public class Teacher {
+    private String subject;
+
+    // Getter and Setter methods
+    public String getSubject() {
+        return subject;
+    }
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+}
+
+In the Spring context, you can auto-wire this bean in another component:
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class SchoolService {
+    @Autowired
+    private Teacher teacher;
+    
+    //... other methods
+}
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

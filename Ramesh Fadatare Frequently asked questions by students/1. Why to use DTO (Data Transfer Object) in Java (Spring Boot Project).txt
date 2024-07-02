@@ -1,0 +1,26 @@
+Why to use DTO (Data Transfer Object) in Java (Spring Boot Project)
+Using Data Transfer Objects (DTOs) in a Spring Boot project, or any other type of Java application, offers numerous benefits. DTOs are simple objects that are used to encapsulate data and send it from one subsystem of an application to another. Here are some key reasons to use DTOs in a Spring Boot project:
+
+1. Decoupling of Presentation and Business Logic
+Layer Separation: DTOs help in separating the presentation layer from the business logic. The data structure used in the database might be different from how data needs to be presented in the UI or to an external API consumer. DTOs act as a middle ground for this data transformation.
+
+Data Aggregation: They can combine data from multiple entities or services into a single object that is optimized for the clients.
+
+2. Data Security and Controlled Exposure
+Selective Data Exposure: Not all data in your business entities (like JPA entities) should be exposed to the client. DTOs allow you to selectively expose data, thereby increasing security.
+
+Avoiding Data Leakage: Using entities directly can inadvertently expose sensitive data or internal implementation details through serialization.  For Example: If the entity class contains sensitive information (ex: password, codes, etc) then if we return the entity directly then the client will get this sensitive information which causes security issues.
+
+3. Performance Optimization
+Reduced Payload: DTOs can be used to send only the necessary data over the network, reducing the size of the data payload, which is particularly important in microservices or web services where bandwidth and performance are concerns.
+
+Lazy Loading Issues: Directly exposing entities, especially in ORM (Object-Relational Mapping) frameworks like Hibernate, can lead to lazy loading issues. DTOs can help avoid these problems by only fetching and exposing what’s needed.
+
+4. Validation and Business Logic Enforcement
+Input Validation: DTOs can be used for validating input data before it’s processed by the business logic. Annotations and validation frameworks can be easily applied to DTO classes.
+
+Business Logic Separation: Keeping business logic out of DTOs and entities helps in maintaining a clean and understandable codebase.
+
+Reference link: Why to use DTO (Data Transfer Object) in Java (Spring Boot Application)
+
+Discussion thread link: https://www.udemy.com/course/building-real-time-rest-apis-with-spring-boot/learn/#questions/18300196/

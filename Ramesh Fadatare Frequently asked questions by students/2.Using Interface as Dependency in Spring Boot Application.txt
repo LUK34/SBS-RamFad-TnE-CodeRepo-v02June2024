@@ -1,0 +1,87 @@
+Link: https://www.javaguides.net/2023/06/using-interface-as-dependency-in-spring.html#google_vignette
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+In this blog post, we will discuss why the Spring team recommends using interfaces as dependencies in Spring or Spring boot applications.
+
+The Spring team recommends using interfaces as dependencies to promote loose coupling and increase flexibility in your codebase. 
+This practice is commonly known as "programming to interfaces."
+
+By depending on interfaces rather than concrete implementations, you decouple your components from specific implementations, 
+allowing for easier swapping of implementations or introducing new implementations in the future. This promotes modularity and makes your code more maintainable and extensible.
+
+In Spring Boot, dependency injection (DI) is a technique where the framework injects dependencies into components rather than the components creating them internally.
+This inversion of control results in loosely coupled components. When using interfaces as dependencies, we define the contract of the dependency through an interface, and the actual implementation is provided at runtime by Spring Boot.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Why Use Interfaces as Dependencies? 
+
+1. Decoupling Code 
+Interfaces help decouple the code. By depending on an interface, a class doesn’t need to know about the concrete implementation of the dependency, 
+thus reducing the tight coupling between components. 
+
+2. Easier Testing 
+Using interfaces makes unit testing easier. You can mock the dependencies using tools like Mockito, providing a way to test each component in isolation. 
+
+3. Flexibility and Scalability 
+It allows for greater flexibility and scalability. Different implementations of an interface can be swapped with minimal changes to the code, 
+which is essential for evolving and scaling applications. 
+
+4. Cleaner Code 
+It promotes cleaner and more maintainable code. With interfaces, the architecture of your application becomes more organized, 
+following the Interface Segregation Principle, one of the SOLID principles.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Suppose you have an application that requires sending notifications to users through various channels like email, SMS, and push notifications. You want your application to be flexible, allowing you to easily switch between different notification implementations or add new ones in the future.
+
+To achieve this, you can define an interface called NotificationService that provides a contract for sending notifications:
+public interface NotificationService 
+{
+    void sendNotification(String message, String recipient);
+}
+Next, you can create different implementations of the NotificationService interface for each channel. For example, let's create an EmailNotificationService and an SMSNotificationService:
+
+public class EmailNotificationService implements NotificationService 
+{
+    public void sendNotification(String message, String recipient) 
+    {
+        // Logic to send an email notification
+    }
+}
+
+public class SMSNotificationService implements NotificationService
+ {
+    public void sendNotification(String message, String recipient) 
+    {
+        // Logic to send an SMS notification
+    }
+}
+
+
+Now, let's say you have a class called NotificationSender that needs to send notifications. Instead of directly depending on concrete implementations like EmailNotificationService or SMSNotificationService, you can depend on the NotificationService interface:
+
+public class NotificationSender 
+{
+    private final NotificationService notificationService;
+
+    public NotificationSender(NotificationService notificationService) 
+    {
+        this.notificationService = notificationService;
+    }
+
+    public void sendNotification(String message, String recipient) 
+   {
+        notificationService.sendNotification(message, recipient);
+    }
+}
+
+
+By depending on the NotificationService interface, the NotificationSender class doesn't need to know which specific implementation it's using.
+It only requires an object that adheres to the NotificationService contract. This allows for greater flexibility and extensibility. 
+Now, using Spring's dependency injection, you can configure the appropriate implementation to be injected into the NotificationSender class based on your needs. 
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
