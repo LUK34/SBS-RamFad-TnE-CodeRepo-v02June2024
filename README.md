@@ -41,16 +41,16 @@ This will teach you how to handle inconsistent data (Rollback) if there is data 
 - **FileName:** SBS-JPA-RamFad-JpaTest
 	
 ## 8. KAFKA Poc using String
-- **Course: ** Apache Kafka and Springboot - The Practical Guide
-- **FileName: ** KAFKA-RamFad-String
+- **Course:** Apache Kafka and Springboot - The Practical Guide
+- **FileName:** KAFKA-RamFad-String
 
 ## 9. KAFKA Poc using JSON
-- **Course: ** Apache Kafka and Springboot - The Practical Guide
-- **FileName: ** KAFKA-RamFad-Json
+- **Course:** Apache Kafka and Springboot - The Practical Guide
+- **FileName:** KAFKA-RamFad-Json
 
 ## 10.KAFKA Wikimedia Multi Modal Project
-- **Course: ** Apache Kafka and Springboot - The Practical Guide
-- **FileName: ** KAFKA-RamFad-Wikimedia
+- **Course:** Apache Kafka and Springboot - The Practical Guide
+- **FileName:** KAFKA-RamFad-Wikimedia
 
 ### Description:
 - KAFKA-RamFad-WikiMedia-Producer ( Fetches the data from wikimedia and store it in Topic->wikimedia_recentchange )
@@ -58,15 +58,15 @@ This will teach you how to handle inconsistent data (Rollback) if there is data 
 
 
 ## 11.KAFKA Microservice
-- **Course: ** Apache Kafka and SpringBoot - The Practical Guide
-- **FileName: ** KAFKA-Base-Domain,KAFKA-Email-Service,KAFKA-Order-Service,KAFKA-Stock-Service
+- **Course:** Apache Kafka and SpringBoot - The Practical Guide
+- **FileName:** KAFKA-Base-Domain,KAFKA-Email-Service,KAFKA-Order-Service,KAFKA-Stock-Service
 - KAFKA-Order-Service (Producer Microservice, Port:8080)
 - KAFKA-Stock-Service (Consumer Microservice, Port:8084)
 - KAFKA-Email-Service (Consumer Microservice, Port:8085)
 
 ## 12.MCRSRV-RamFad-Rest-SimpleCRUDv1
-- **Course: ** Build Microservices using Spring Boot 3, Spring Cloud, React, Kafka, RabbitMQ, REST API, Docker & IntelliJ IDEA
-- **FileName: ** MCRSRV-RamFad-Rest-SimpleCRUDv1
+- **Course:** Build Microservices using Spring Boot 3, Spring Cloud, React, Kafka, RabbitMQ, REST API, Docker & IntelliJ IDEA
+- **FileName:** MCRSRV-RamFad-Rest-SimpleCRUDv1
 
 ### Description:
 - Implemented CRUD Operation via data transfer using DTO and Entity (ModelMapper dependency)
@@ -75,8 +75,8 @@ This will teach you how to handle inconsistent data (Rollback) if there is data 
 - Implemented SWAGGER (3.x.x -> http://localhost:8080/swagger-ui/index.html)
 
 ## 13.MCRSRV-RamFad-Rest-SimpleCRUDv2
-- **Course: ** Build Microservices using Spring Boot 3, Spring Cloud, React, Kafka, RabbitMQ, REST API, Docker & IntelliJ IDEA
-- **FileName: ** MCRSRV-RamFad-Rest-SimpleCRUDv2
+- **Course:** Build Microservices using Spring Boot 3, Spring Cloud, React, Kafka, RabbitMQ, REST API, Docker & IntelliJ IDEA
+- **FileName:** MCRSRV-RamFad-Rest-SimpleCRUDv2
 
 ### Description:
 - Implemented CRUD Operation via data transfer using DTO and Entity (MapStruct dependency)
@@ -94,11 +94,11 @@ This will teach you how to handle inconsistent data (Rollback) if there is data 
 - production-level projects where performance and type safety are crucial, and use ModelMapper for simpler or prototype applications where ease of use is a priority.
 
 ## 14.MCRSRV-RamFad-Microservice
-- **Course: ** Build Microservices using Spring Boot 3, Spring Cloud, React, Kafka, RabbitMQ, REST API, Docker & IntelliJ IDEA
-- **FileName: ** MCRSRV-RamFad-Microservice
+- **Course:** Build Microservices using Spring Boot 3, Spring Cloud, React, Kafka, RabbitMQ, REST API, Docker & IntelliJ IDEA
+- **FileName:** MCRSRV-RamFad-Microservice
 
 ### Description:
-- This is a Mulit Modal Project
+- This is a Mulit Modal Project:
 - MCRSRV-DepartmentService (3.x.x -> http://localhost:8080/swagger-ui/index.html),
 - MCRSRV-EmployeeService   (3.x.x -> http://localhost:8081/swagger-ui/index.html)
 - Implemented Exception Handling
@@ -106,8 +106,16 @@ This will teach you how to handle inconsistent data (Rollback) if there is data 
 - Implemented SWAGGER 
 - Implemented ModelMapper 
 
+## 15.SBS-RamFad-BLOG-3.x.x
+- **Course:** Build REST APIs using Spring Boot, Spring Security 6, JWT, Spring Data JPA, Hibernate, MySQL, Docker &amp; Deploy on AWS
+- **FileName:** SBS-RamFad-BLOG-3.x.x
 
-
+### Description:
+- Implemented Exception Handling
+- Implemented Validations
+- Implemented SWAGGER  (3.x.x -> http://localhost:8080/swagger-ui/index.html)
+- Implemented Pagination
+- Implemented ModelMapper 
 
 
 	

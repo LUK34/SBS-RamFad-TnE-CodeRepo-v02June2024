@@ -1,0 +1,34 @@
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question:
+Why do we apply authentication filter before the UsernameAndPasswordFilter?
+
+Answer:
+Before spring security authentication using username and password, we need to validate the JWT token. 
+So, the JWT authentication filter serves the purpose of intercepting incoming requests and extracting and validating the JWT token present in the request.
+
+One more reason is that validating a JWT is typically faster than querying a database for username and password checks.
+
+I hope this will clear your doubts.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Question:
+Had 2 questions on your response:
+
+1) In login functionality we are verifying username and password first and then generating the JWT token. So according to you response, this generated token would be verified by our authentication filter and then again UsernamePasswordAuthenticationFilter will run?
+
+2) In terms of accessing other APIs than login, does placing Jwt filter before spring security  and setting the security context is the setting which  allows us to skip the step of providing username and password to spring security filter every time?
+
+Answer:
+Let me explain the flow:
+
+For the Login REST API call, the JwtAuthenticationFilter skips the JWT validation logic and forwards the request to /authenticate method in the AuthServiceImpl class. 
+The /authenticate method checks the username and password, generates a JWT token, and returns that token to that client.
+
+Next, the client passes the JWT token in the header of each request. The JwtAuthenticationFilter intercepts incoming requests and extracts and validates the JWT token present in the request.
+
+Note: We are using our own Database Authentication and JwtAuthenticationFilter and we are not using spring securities filters for authentication and validation of the JWT token.
+
+UsernamePasswordAuthenticationFilter is to handle spring security default login and logout.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+

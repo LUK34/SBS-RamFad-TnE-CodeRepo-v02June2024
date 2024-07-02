@@ -1,0 +1,27 @@
+Has A relationship between post and comment
+
+Question:
+Hello sir,
+
+I read the Head First Java book that mentions that in order to determine the instance variables of any class, check Has a relationship. Based on that logic, Post has comments, so the Post entity should have had comments as an instance variable. Whereas, in lecture 67, we have Post as an instance variable in the comments entity class which would mean that comments has post, which logically does not make sense. Could you please clarify this confusion for me?
+
+Answer:
+The "Has-a" relationship in object-oriented programming (OOP) is used to describe the relationship between two classes. When you say "Post has comments," it suggests that the Post class should have an instance variable that represents comments, often as a collection (like a List<Comment>). This is a common way to represent a one-to-many relationship where one post can have multiple comments.
+
+However, the reverse relationship, "Comment has a post," also makes sense in many contexts, particularly in relational databases and object-relational mapping (ORM) frameworks like JPA/Hibernate in Java. This represents a many-to-one relationship where many comments can be associated with one post. In this case, each Comment instance has a reference back to the Post it belongs to.
+
+This bidirectional relationship is beneficial because:
+
+Navigability: It allows navigation from both sides. You can access all comments from a post and also find out to which post a comment belongs.
+
+Data Integrity: It helps in maintaining consistent relationships between posts and comments, especially in database operations.
+
+Query Optimization: In some cases, having a reference in both directions can make certain queries more efficient.
+
+Object-Relational Mapping (ORM): Frameworks like JPA/Hibernate often utilize both sides of the relationship for better ORM capabilities and to maintain synchronization between the object model and the relational database model.
+
+The books give you basic ideas but the real-time experience gives you how to use it in real-time. So both "Post has comments" and "Comment has a post" are valid and logical in the context of object-oriented design, especially when dealing with relational data models. They represent two sides of a bidirectional relationship.
+
+
+
+Discussion thread link: https://www.udemy.com/course/building-real-time-rest-apis-with-spring-boot/learn/#questions/20958226/
