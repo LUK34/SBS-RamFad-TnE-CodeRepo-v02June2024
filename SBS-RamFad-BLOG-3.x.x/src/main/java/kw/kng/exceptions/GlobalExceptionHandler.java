@@ -54,6 +54,16 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler
 		return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
 	}
 	
+	@ExceptionHandler(BlogApiException.class)
+	public ResponseEntity<ErrorDetails> handleBlogApiException(BlogApiException ex, WebRequest webRequest)
+	{
+		ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(),
+				  																  ex.getMessage(),
+				  																  webRequest.getDescription(false),
+																				  "BAD_GATEWAY _->_BLOG_API_EXCPETION");
+		
+		return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+	}
 	
 	//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		

@@ -90,7 +90,7 @@ public class PostController
 	public ResponseEntity<String> deletePostById(@PathVariable("id") Long postId)
 	{
 		ps.deletePostById(postId);
-		return ResponseEntity.ok("Post with id: "+postId+"deleted successfully in DB!!!");
+		return ResponseEntity.ok("Post with id: "+postId+" deleted successfully in DB!!!");
 	}
 	
 	
