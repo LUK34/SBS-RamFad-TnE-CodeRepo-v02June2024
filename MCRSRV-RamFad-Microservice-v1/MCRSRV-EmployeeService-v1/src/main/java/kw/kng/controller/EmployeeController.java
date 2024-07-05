@@ -65,6 +65,7 @@ public class EmployeeController
 	public ResponseEntity<List<EmployeeDto>> addEmployee_Multiple(@RequestBody @Valid List<@Valid EmployeeDto> empDto)
 	{
 		List<EmployeeDto> savedEmployeeList = es.createEmployeeMultiple(empDto);
+		System.out.println("List :"+savedEmployeeList);
 		return new ResponseEntity<>(savedEmployeeList, HttpStatus.CREATED);
 	}
 	

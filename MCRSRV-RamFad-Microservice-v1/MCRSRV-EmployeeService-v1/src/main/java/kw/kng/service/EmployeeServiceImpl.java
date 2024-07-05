@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import kw.kng.dto.APIResponseDto;
 import kw.kng.dto.DepartmentDto;
@@ -25,14 +26,15 @@ public class EmployeeServiceImpl implements EmployeeService
 	private EmployeeRepo erepo;
 	private ModelMapper modelMapper;  //Spring bean
 	private RestTemplate restTemplate ;    //Spring bean
+	private WebClient webClient;  //Spring bean
 	
 	
-	
-	public EmployeeServiceImpl(EmployeeRepo erepo, ModelMapper modelMapper,RestTemplate restTemplate) 
+	public EmployeeServiceImpl(EmployeeRepo erepo, ModelMapper modelMapper,RestTemplate restTemplate, WebClient webClient) 
 	{
 		this.erepo = erepo;
 		this.modelMapper= modelMapper;
 		this.restTemplate = restTemplate;
+		this.webClient=webClient;
 	}
 
 	//---------------------------------------------------------------------------------------------------------------------------------------
@@ -59,11 +61,22 @@ public class EmployeeServiceImpl implements EmployeeService
 		}
 		
 		//----------------------------------------------------------------------------------------
-		//1. MicroService Communication -> REST Template Method: 
-		//Check if the department code of department microservice exist or not 
-		ResponseEntity<DepartmentDto> responseEntity = restTemplate.getForEntity(mcrsrvDSGetCodeUrl + employeeDto.getDepartmentCode() , DepartmentDto.class);
-		String checkDepCodeExistOrNot = responseEntity.getBody().getDepartmentCode();		
-		employeeDto.setDepartmentCode(checkDepCodeExistOrNot);
+		//Check if the department code of department microservice exist or not :
+		
+		//1. MicroService Communication -> REST Template Method:  OLD soon to be deprecated
+		/*
+			ResponseEntity<DepartmentDto> responseEntity = restTemplate.getForEntity(mcrsrvDSGetCodeUrl + employeeDto.getDepartmentCode() , DepartmentDto.class);
+			String checkDepCodeExistOrNot = responseEntity.getBody().getDepartmentCode();		
+		*/
+		
+		//2. MicroService Communication -> WebClient Method: 
+		DepartmentDto departmentDto = webClient.get()
+																				  .uri(mcrsrvDSGetCodeUrl + employeeDto.getDepartmentCode().trim())
+																				  .retrieve()
+																				  .bodyToMono(DepartmentDto.class)
+																				  .block();
+		
+		employeeDto.setDepartmentCode(departmentDto.getDepartmentCode().trim());
 		//----------------------------------------------------------------------------------------
 
 		//Transfer DTO to ENTITY
@@ -100,15 +113,28 @@ public class EmployeeServiceImpl implements EmployeeService
 			//Check if the department code of `DepartmentService` microservice exist or not  -Validation will be handled by  `DepartmentService` microservice
 			for(Employee e :empList)
 			{
-				String departmentCode = e.getDepartmentCode();
+				String departmentCode = e.getDepartmentCode().trim();
 				
 				//----------------------------------------------------------------------------------------
-				//1. MicroService Communication -> REST Template Method: 
-				//Check if the department code of department microservice exist or not 
-				ResponseEntity<DepartmentDto> responseEntity = restTemplate.getForEntity(mcrsrvDSGetCodeUrl + departmentCode , DepartmentDto.class);
-				String checkDepCodeExistOrNot = responseEntity.getBody().getDepartmentCode();		
+				//Check if the department code of department microservice exist or not :
+	
+				//1. MicroService Communication -> REST Template Method -> REST Template Method:  OLD soon to be deprecated
+				/*
+					ResponseEntity<DepartmentDto> responseEntity = restTemplate.getForEntity(mcrsrvDSGetCodeUrl + departmentCode , DepartmentDto.class);
+					String checkDepCodeExistOrNot = responseEntity.getBody().getDepartmentCode();		
+					e.setDepartmentCode(checkDepCodeExistOrNot);
+				*/
+				
+				//2. MicroService Communication -> WebClientMethod Method 
+				DepartmentDto departmentDto = webClient.get()
+																						 .uri(mcrsrvDSGetCodeUrl + departmentCode)
+																						 .retrieve()
+																						 .bodyToMono(DepartmentDto.class)
+																						 .block();
+
+				e.setDepartmentCode(departmentDto.getDepartmentCode().trim());
 				//----------------------------------------------------------------------------------------
-				e.setDepartmentCode(checkDepCodeExistOrNot);
+				
 			}		
 									
 		//Save the List in persistance
@@ -126,9 +152,18 @@ public class EmployeeServiceImpl implements EmployeeService
 		Employee emp = erepo.findById(empId).orElseThrow(() -> new ResourceNotFoundException("Employee with id: "+empId+" not found in DB"));
 		
 		//----------------------------------------------------------------------------------------
-		//1. MicroService Communication -> REST Template Method:
+		//1. MicroService Communication -> REST Template Method -> REST Template Method:  OLD soon to be deprecated
+		/*
 		ResponseEntity<DepartmentDto> responseEntity = restTemplate.getForEntity(mcrsrvDSGetCodeUrl + emp.getDepartmentCode() , DepartmentDto.class);
 		DepartmentDto departmentDto = responseEntity.getBody();
+		*/
+		
+		//2. MicroService Communication -> WebClientMethod Method 
+		DepartmentDto departmentDto = webClient.get()
+																				 .uri(mcrsrvDSGetCodeUrl + emp.getDepartmentCode().trim())
+																				 .retrieve()
+																				 .bodyToMono(DepartmentDto.class)
+																				 .block();
 		//----------------------------------------------------------------------------------------
 		
 		//If found transfer the data from ENTITY to DTO
@@ -160,9 +195,18 @@ public class EmployeeServiceImpl implements EmployeeService
 	    {
 	    	
 	    	//----------------------------------------------------------------------------------------
-	        // 1. MicroService Communication -> REST Template Method:
-	        ResponseEntity<DepartmentDto> responseEntity = restTemplate.getForEntity(mcrsrvDSGetCodeUrl + emp.getDepartmentCode(), DepartmentDto.class);
+	        // 1. MicroService Communication -> REST Template Method -> REST Template Method:  OLD soon to be deprecated
+	        /*
+	    	ResponseEntity<DepartmentDto> responseEntity = restTemplate.getForEntity(mcrsrvDSGetCodeUrl + emp.getDepartmentCode(), DepartmentDto.class);
 	        DepartmentDto departmentDto = responseEntity.getBody();
+	        */
+	    	
+			//2. MicroService Communication -> WebClientMethod Method 
+			DepartmentDto departmentDto = webClient.get()
+																					 .uri(mcrsrvDSGetCodeUrl + emp.getDepartmentCode().trim())
+																					 .retrieve()
+																					 .bodyToMono(DepartmentDto.class)
+																					 .block();
 	        //----------------------------------------------------------------------------------------
 	        
 	        // Transfer the data from ENTITY to DTO
@@ -189,17 +233,28 @@ public class EmployeeServiceImpl implements EmployeeService
 	{
 		//Search in DB if the data exist or not. If not throw `ResourceNotFoundException`
 		Employee emp = erepo.findById(empId).orElseThrow(() -> new ResourceNotFoundException("Employee with id: "+empId+" not found in DB"));
+		//----------------------------------------------------------------------------------------
+		//Check if the department code of department microservice exist or not
 		
 		//1. MicroService Communication -> REST Template Method: 
-		//Check if the department code of department microservice exist or not 
+		/*
 		ResponseEntity<DepartmentDto> responseEntity = restTemplate.getForEntity(mcrsrvDSGetCodeUrl + empDto.getDepartmentCode() , DepartmentDto.class);
 		String checkDepCodeExistOrNot = responseEntity.getBody().getDepartmentCode();		
+		*/
 		
+		//2. MicroService Communication -> WebClientMethod Method 
+		DepartmentDto departmentDto = webClient.get()
+																				 .uri(mcrsrvDSGetCodeUrl + empDto.getDepartmentCode().trim())
+																				 .retrieve()
+																				 .bodyToMono(DepartmentDto.class)
+																				 .block();
+		
+		//----------------------------------------------------------------------------------------
 		//Transfer DTO to ENTITY 
 		emp.setFirstName(empDto.getFirstName());
 		emp.setLastName(empDto.getLastName());
 		emp.setEmail(empDto.getEmail());
-		emp.setDepartmentCode(checkDepCodeExistOrNot);
+		emp.setDepartmentCode(empDto.getDepartmentCode().trim());
 		
 		//Save the ENTITY details to Persistance
 		Employee updateEmp = erepo.save(emp);

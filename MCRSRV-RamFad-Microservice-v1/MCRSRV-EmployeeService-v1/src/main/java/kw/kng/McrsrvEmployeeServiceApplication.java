@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -43,9 +44,15 @@ public class McrsrvEmployeeServiceApplication
 	}
 	
 	@Bean
-	public RestTemplate restTemplate()
+	public RestTemplate restTemplate()   //In version 5 this is in maintenance mode. This will soon be deprecated.
 	{
 		return new RestTemplate();
+	}
+	
+	@Bean
+	public WebClient webClient()
+	{
+		return WebClient.builder().build();
 	}
 	
 	public static void main(String[] args) 
