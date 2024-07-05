@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -27,14 +26,16 @@ public class EmployeeServiceImpl implements EmployeeService
 	private ModelMapper modelMapper;  //Spring bean
 	private RestTemplate restTemplate ;    //Spring bean
 	private WebClient webClient;  //Spring bean
+	private APIClient apiClient;
 	
 	
-	public EmployeeServiceImpl(EmployeeRepo erepo, ModelMapper modelMapper,RestTemplate restTemplate, WebClient webClient) 
+	public EmployeeServiceImpl(EmployeeRepo erepo, ModelMapper modelMapper,RestTemplate restTemplate, WebClient webClient,APIClient apiClient) 
 	{
 		this.erepo = erepo;
 		this.modelMapper= modelMapper;
 		this.restTemplate = restTemplate;
 		this.webClient=webClient;
+		this.apiClient=apiClient;
 	}
 
 	//---------------------------------------------------------------------------------------------------------------------------------------
@@ -44,9 +45,6 @@ public class EmployeeServiceImpl implements EmployeeService
 	private String mcrsrvDSGetCodeUrl;
 	
 	//---------------------------------------------------------------------------------------------------------------------------------------
-	
-	
-	
 	
 
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -70,11 +68,16 @@ public class EmployeeServiceImpl implements EmployeeService
 		*/
 		
 		//2. MicroService Communication -> WebClient Method: 
+		/*
 		DepartmentDto departmentDto = webClient.get()
 																				  .uri(mcrsrvDSGetCodeUrl + employeeDto.getDepartmentCode().trim())
 																				  .retrieve()
 																				  .bodyToMono(DepartmentDto.class)
-																				  .block();
+																				  .block();	
+		*/
+		
+		//3. MicroService Communication -> Feign Client Method: 
+		DepartmentDto departmentDto = apiClient.getDepartmentByCode(employeeDto.getDepartmentCode());
 		
 		employeeDto.setDepartmentCode(departmentDto.getDepartmentCode().trim());
 		//----------------------------------------------------------------------------------------
@@ -126,12 +129,17 @@ public class EmployeeServiceImpl implements EmployeeService
 				*/
 				
 				//2. MicroService Communication -> WebClientMethod Method 
+				/*
 				DepartmentDto departmentDto = webClient.get()
 																						 .uri(mcrsrvDSGetCodeUrl + departmentCode)
 																						 .retrieve()
 																						 .bodyToMono(DepartmentDto.class)
 																						 .block();
-
+				*/
+				
+				//3. MicroService Communication -> Feign Client Method: 
+				DepartmentDto departmentDto = apiClient.getDepartmentByCode(e.getDepartmentCode());
+	
 				e.setDepartmentCode(departmentDto.getDepartmentCode().trim());
 				//----------------------------------------------------------------------------------------
 				
@@ -159,11 +167,17 @@ public class EmployeeServiceImpl implements EmployeeService
 		*/
 		
 		//2. MicroService Communication -> WebClientMethod Method 
+		/*
 		DepartmentDto departmentDto = webClient.get()
 																				 .uri(mcrsrvDSGetCodeUrl + emp.getDepartmentCode().trim())
 																				 .retrieve()
 																				 .bodyToMono(DepartmentDto.class)
 																				 .block();
+		*/
+		
+		//3. MicroService Communication -> Feign Client Method: 
+		DepartmentDto departmentDto = apiClient.getDepartmentByCode(emp.getDepartmentCode());
+		
 		//----------------------------------------------------------------------------------------
 		
 		//If found transfer the data from ENTITY to DTO
@@ -202,11 +216,16 @@ public class EmployeeServiceImpl implements EmployeeService
 	        */
 	    	
 			//2. MicroService Communication -> WebClientMethod Method 
-			DepartmentDto departmentDto = webClient.get()
+			/*
+	    	DepartmentDto departmentDto = webClient.get()
 																					 .uri(mcrsrvDSGetCodeUrl + emp.getDepartmentCode().trim())
 																					 .retrieve()
 																					 .bodyToMono(DepartmentDto.class)
 																					 .block();
+			*/
+	    	//3. MicroService Communication -> Feign Client Method: 
+			DepartmentDto departmentDto = apiClient.getDepartmentByCode(emp.getDepartmentCode());
+	    	
 	        //----------------------------------------------------------------------------------------
 	        
 	        // Transfer the data from ENTITY to DTO
@@ -243,11 +262,16 @@ public class EmployeeServiceImpl implements EmployeeService
 		*/
 		
 		//2. MicroService Communication -> WebClientMethod Method 
+		/*
 		DepartmentDto departmentDto = webClient.get()
 																				 .uri(mcrsrvDSGetCodeUrl + empDto.getDepartmentCode().trim())
 																				 .retrieve()
 																				 .bodyToMono(DepartmentDto.class)
 																				 .block();
+		*/
+		
+		//3. MicroService Communication -> Feign Client Method: 
+		DepartmentDto departmentDto = apiClient.getDepartmentByCode(empDto.getDepartmentCode());
 		
 		//----------------------------------------------------------------------------------------
 		//Transfer DTO to ENTITY 
