@@ -106,7 +106,7 @@ This will teach you how to handle inconsistent data (Rollback) if there is data 
 - Implemented SWAGGER 
 - Implemented ModelMapper 
 - Implemented following Microservice Communications: 
-  - RestTemplate (Code Commit Has Code: 860e083f9212f8d8a0f0de5fe35df38a36305d91)
+  - RestTemplate (Code Commit Hash Code: 860e083f9212f8d8a0f0de5fe35df38a36305d91)
 
 
 ## 15.SBS-RamFad-BLOG-3.x.x
