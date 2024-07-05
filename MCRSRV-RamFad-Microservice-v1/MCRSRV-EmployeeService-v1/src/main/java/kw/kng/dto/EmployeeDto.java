@@ -38,4 +38,5 @@ public class EmployeeDto
 	@Email(message="Employee Email should be VALID") //should have VALID Email
 	private String email;
 
+	private String departmentCode;
 }

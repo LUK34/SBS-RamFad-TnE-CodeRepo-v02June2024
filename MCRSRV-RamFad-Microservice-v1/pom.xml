@@ -1,15 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>kw.kng</groupId>
-  <artifactId>MCRSRV-RamFad-Microservice</artifactId>
+  <artifactId>MCRSRV-RamFad-Microservice-v1</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>MCRSRV-RamFad-Microservice</name>
-  <description>MCRSRV-RamFad-Microservice -This is the Parent Project Root Folder</description>
+  <name>MCRSRV-RamFad-Microservice-v1</name>
+  <description>MCRSRV-RamFad-Microservice-v1 -This is the Parent Project Root Folder</description>
 
 	<modules>
-		<module>MCRSRV-EmployeeService</module>
-		<module>MCRSRV-DepartmentService</module>
+		<module>MCRSRV-EmployeeService-v1</module>
+		<module>MCRSRV-DepartmentService-v1</module>
 	</modules>
 	  
 </project>

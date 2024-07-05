@@ -17,6 +17,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import kw.kng.dto.APIResponseDto;
 import kw.kng.dto.EmployeeDto;
 import kw.kng.service.EmployeeService;
 
@@ -78,10 +79,10 @@ public class EmployeeController
 	)
 	//GET -> Get Employee by id
 	@GetMapping("/{id}")
-	public ResponseEntity<EmployeeDto> getEmployeeById(@PathVariable("id") Long  empId)
+	public ResponseEntity<APIResponseDto> getEmployeeById(@PathVariable("id") Long  empId)
 	{
-		EmployeeDto empDto = es.getEmployeeById(empId);
-		return ResponseEntity.ok(empDto);
+		APIResponseDto apiDto = es.getEmployeeById(empId);
+		return ResponseEntity.ok(apiDto);
 	}
 	
 	@Operation(
@@ -94,9 +95,9 @@ public class EmployeeController
 	)
 	//GET -> Get All Employee List
 	@GetMapping
-	public ResponseEntity<List<EmployeeDto>> getAllEmployeeList()
+	public ResponseEntity<List<APIResponseDto>> getAllEmployeeList()
 	{
-		List<EmployeeDto> empList = es.getAllEmployee();
+		List<APIResponseDto> empList = es.getAllEmployee();
 		return ResponseEntity.ok(empList);
 	}
 	

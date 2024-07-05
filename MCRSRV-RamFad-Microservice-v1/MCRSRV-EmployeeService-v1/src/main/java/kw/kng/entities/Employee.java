@@ -27,4 +27,14 @@ public class Employee
 	
 	@Column(nullable=false, unique= true)
 	private String email;
+	
+	private String departmentCode;
 }
+
+/*
+ DepartmentDto class must be created in the dto package of `EmployeeService-1` so that the data coming from `DepartmentService-v1` microservice will be 
+ pass to `DepartmentDto` class. In this specific step we are following `RestTemplate` approach to handle the request/response
+ communication between `EmployeeService` and `DepartmentService`.
+ 
+  
+ */

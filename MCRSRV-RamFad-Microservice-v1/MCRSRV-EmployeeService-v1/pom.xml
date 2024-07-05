@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>kw.kng</groupId>
-	<artifactId>MCRSRV-DepartmentService</artifactId>
+	<artifactId>MCRSRV-EmployeeService-v1</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>MCRSRV-DepartmentService</name>
+	<name>MCRSRV-EmployeeService-v1</name>
 	<description>Ramesh Fadatare Course</description>
 	<url/>
 	<licenses>
@@ -38,8 +38,8 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
-		<dependency>
+		
+				<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
@@ -65,7 +65,7 @@
 			<scope>test</scope>
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/org.modelmapper/modelmapper -->
+				<!-- https://mvnrepository.com/artifact/org.modelmapper/modelmapper -->
 		<!--  Model Mapper Dependency START -->
 		<dependency>
 			<groupId>org.modelmapper</groupId>
@@ -101,6 +101,8 @@
 			<version>0.58</version>
 		</dependency>
 		<!-- -->
+		
+		
 		
 	</dependencies>
 
