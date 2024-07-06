@@ -32,6 +32,7 @@ import io.swagger.v3.oas.annotations.info.License;
 										)
 )
 @SpringBootApplication
+//@EnableEurekaClient -> Only for 2.x.x , for 3.x.x this is autoconfigured
 public class McrsrvDepartmentServiceApplication
 {
 	@Bean
