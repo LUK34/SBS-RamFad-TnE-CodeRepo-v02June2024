@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import kw.kng.dto.DepartmentDto;
 
 //@FeignClient(url="${mcrsrv-ds-get-dep-url}", value="DEPARTMENT-SERVICE")
-@FeignClient( value="DEPARTMENT-SERVICE")
+@FeignClient( value="DEPARTMENT-SERVICE-v1")
 public interface APIClient 
 {
 	
-	@GetMapping("/{code}")
+	@GetMapping("/api/departments//code/{code}")
 	DepartmentDto getDepartmentByCode(@PathVariable("code") String depCode);
 
 	
