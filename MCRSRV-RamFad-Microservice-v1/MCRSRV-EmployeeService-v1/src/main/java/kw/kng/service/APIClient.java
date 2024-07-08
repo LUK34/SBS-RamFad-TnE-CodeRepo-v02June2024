@@ -12,7 +12,7 @@ import kw.kng.dto.DepartmentDto;
 public interface APIClient 
 {
 	
-	@GetMapping("/api/departments//code/{code}")
+	@GetMapping("/api/departments/code/{code}")
 	DepartmentDto getDepartmentByCode(@PathVariable("code") String depCode);
 
 	

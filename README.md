@@ -102,7 +102,8 @@ This will teach you how to handle inconsistent data (Rollback) if there is data 
 - MCRSRV-DepartmentService-v1 (3.x.x -> http://localhost:8080/swagger-ui/index.html, Eureka Client, Port:8080,8082),
 - MCRSRV-EmployeeService-v1   (3.x.x -> http://localhost:8081/swagger-ui/index.html, Eureka Client, Port:8081)
 - MCRSRV-ServiceRegistry-v1	  (Eureka Server, Port:8761)
-- MCRSRV-ApiGateway-v1		  (Eureka Client, Port:9191)  
+- MCRSRV-ApiGateway-v1		  (Eureka Client, Port:9191) 
+- MCRSRV-ConfigServer-v1 	   (Prgm to call Config files present at Github, Port:8888)
 - Implemented Exception Handling
 - Implemented Validations
 - Implemented SWAGGER 
@@ -111,7 +112,7 @@ This will teach you how to handle inconsistent data (Rollback) if there is data 
   - RestTemplate (Code Commit Hash Code: 860e083f9212f8d8a0f0de5fe35df38a36305d91) -> will soon be deprecated(5.0), later versions this will be deprecated.
   - WebClient (Code Commit Hash Code: f770a58dbff9c99a05b00de5830e3827eb8d7ecb)
   - FeignClient (Code Commit Hash Code: b007e310451fc462fe504f7f0b2da680a2bedcf4)  ->**Currently used for microservice communication** 
-- Implemented API Gateway Routes(Code Commit Hash Code: 65b2a471e8f22380b53e0c506ee97f274f3984cd)  
+- Implemented API Gateway Routes(Code Commit Hash Code: 65b2a471e8f22380b53e0c506ee97f274f3984cd) manual (**Best**) and automatic.
   
 ## 15.SBS-RamFad-BLOG-3.x.x
 - **Course:** Build REST APIs using Spring Boot, Spring Security 6, JWT, Spring Data JPA, Hibernate, MySQL, Docker &amp; Deploy on AWS
