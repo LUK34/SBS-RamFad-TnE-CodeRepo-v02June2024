@@ -9,6 +9,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -60,10 +62,34 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler
 		ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(),
 				  																  ex.getMessage(),
 				  																  webRequest.getDescription(false),
-																				  "BAD_GATEWAY _->_BLOG_API_EXCPETION");
+																				  "BAD_GATEWAY _->_BLOG_API_EXCEPTION");
 		
 		return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
 	}
+	
+	@ExceptionHandler(AccessDeniedException.class)
+	public ResponseEntity<ErrorDetails> handleAccessDeniedException(AccessDeniedException ex, WebRequest webRequest)
+	{
+		ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(),
+				  																  ex.getMessage(),
+				  																  webRequest.getDescription(false),
+																				  "UNAUTHORIZED_->_ACCESS_DENIED_EXCEPTION");
+		
+		return new ResponseEntity<>(errorDetails, HttpStatus.UNAUTHORIZED);
+	}
+
+	@ExceptionHandler(UsernameNotFoundException.class)
+	public ResponseEntity<ErrorDetails> handleUsernameNotFoundException(UsernameNotFoundException ex, WebRequest webRequest)
+	{
+		ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(),
+				  																  ex.getMessage(),
+				  																  webRequest.getDescription(false),
+																				  "UNAUTHORIZED_->_USERNAME_NOT_FOUND_EXCEPTION");
+		
+		return new ResponseEntity<>(errorDetails, HttpStatus.UNAUTHORIZED);
+	}
+	
+	
 	
 	//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		

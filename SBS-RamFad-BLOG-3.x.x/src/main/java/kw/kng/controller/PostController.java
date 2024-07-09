@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +33,7 @@ public class PostController
 	}
 	
 	//POST -> Create a SINGLE Post
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/single")
 	public ResponseEntity<PostDto> createPost(@RequestBody @Valid PostDto postDto)
 	{
@@ -40,6 +42,7 @@ public class PostController
 	}
 	
 	//POST - Create MULTIPLE Post
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/multiple")
 	public ResponseEntity<List<PostDto>> createPostMultiple(@RequestBody @Valid List<@Valid PostDto> postDto)
 	{
@@ -78,6 +81,7 @@ public class PostController
 	}
 	
 	//PUT - Update POST by id
+	@PreAuthorize("hasRole('ADMIN')")
 	@PutMapping("/{id}")
 	public ResponseEntity<PostDto> updatePost(@PathVariable("id") Long postId, @RequestBody @Valid PostDto postDto)
 	{
@@ -86,6 +90,7 @@ public class PostController
 	}
 	
 	//DELETE- Delete POST by id
+	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deletePostById(@PathVariable("id") Long postId)
 	{

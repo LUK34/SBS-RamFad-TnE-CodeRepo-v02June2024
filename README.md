@@ -124,6 +124,7 @@ This will teach you how to handle inconsistent data (Rollback) if there is data 
 - Implemented SWAGGER  (3.x.x -> http://localhost:8080/swagger-ui/index.html)
 - Implemented Pagination
 - Implemented ModelMapper 
+- Implemented SecurityFilterChain for 3.x.x
 
 
 	
