@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
 import kw.kng.payload.LoginDto;
 import kw.kng.payload.RegisterDto;
 import kw.kng.service.AuthService;
@@ -24,7 +25,7 @@ public class AuthController
 	
 	//Build Login REST API
 	@PostMapping(value = {"/login", "/signin"})
-	public ResponseEntity<String> login(@RequestBody LoginDto loginDto)
+	public ResponseEntity<String> login(@RequestBody @Valid LoginDto loginDto)
 	{
 		String response = as.login(loginDto);
 		
@@ -33,7 +34,7 @@ public class AuthController
 
 	//Build Register REST API
 	@PostMapping(value = {"/register", "/signup"})
-	public ResponseEntity<String> register(@RequestBody RegisterDto registerDto)
+	public ResponseEntity<String> register(@RequestBody @Valid RegisterDto registerDto)
 	{
 		String response = as.register(registerDto);
 		return new ResponseEntity<>(response, HttpStatus.CREATED);
