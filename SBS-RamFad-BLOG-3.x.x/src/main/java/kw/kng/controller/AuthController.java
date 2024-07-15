@@ -7,12 +7,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import kw.kng.payload.JwtAuthResponse;
 import kw.kng.payload.LoginDto;
 import kw.kng.payload.RegisterDto;
 import kw.kng.service.AuthService;
 
+@Tag(
+		name="BLOG REST APIs for Authentication Resource",
+		description= "BLOG REST APIs for Authentication Resource = Login/Signin, Register/Signup" 
+)
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController 
@@ -24,6 +32,17 @@ public class AuthController
 		this.as = as;
 	}
 	
+	@SecurityRequirement(
+			name="Bear Authentication"
+	)
+	@Operation(
+			summary="Login/Signin REST API",
+			description="Login/Signin REST API to get a specific category by id from Database"
+	 )
+	@ApiResponse(
+			responseCode="200",
+			description="HTTP STATUS 200 OK"
+	 )
 	//Build Login REST API
 	@PostMapping(value = {"/login", "/signin"})
 	public ResponseEntity<JwtAuthResponse> login(@RequestBody @Valid LoginDto loginDto)
@@ -36,6 +55,17 @@ public class AuthController
 		return ResponseEntity.ok(jwtAuthResponse);
 	}
 
+	@SecurityRequirement(
+			name="Bear Authentication"
+	)
+	@Operation(
+			summary="Register/Signup REST API",
+			description="Register/Signup REST API to get a specific category by id from Database"
+	 )
+	@ApiResponse(
+			responseCode="200",
+			description="HTTP STATUS 200 OK"
+	 )
 	//Build Register REST API
 	@PostMapping(value = {"/register", "/signup"})
 	public ResponseEntity<String> register(@RequestBody @Valid RegisterDto registerDto)

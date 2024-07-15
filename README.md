@@ -125,7 +125,7 @@ This will teach you how to handle inconsistent data (Rollback) if there is data 
 - Implemented Pagination
 - Implemented ModelMapper 
 - Implemented SecurityFilterChain for 3.x.x
-
+- Implemented JWT Token (HashCode: 9956224061c0fa7b2275221cf3829ebf4d8674fa)
 
 	
 	

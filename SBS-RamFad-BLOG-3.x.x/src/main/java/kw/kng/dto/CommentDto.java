@@ -1,5 +1,6 @@
 package kw.kng.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -8,6 +9,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Schema(
+		description="Comment DTO(Data Transfer Object) to transfer the data between CLIENT and SERVER"
+)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

@@ -5,7 +5,34 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import io.swagger.v3.oas.annotations.ExternalDocumentation;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Contact;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.info.License;
+
+
 @SpringBootApplication
+@OpenAPIDefinition(
+		info=@Info(
+					title="BLOG REST API Documentation",
+					description="BLOG REST API Documentation",
+					version="v03June2024",
+					contact=@Contact(
+										name="Luke Rajan Mathew",
+										email="",
+										url=""
+					),
+					license=@License(
+										name="",
+										url=""
+					)
+				),
+	   externalDocs= @ExternalDocumentation(
+											description="BLOG REST API Documentation for Developers",
+											url="https://www.javaguides.net/external-doc.html"
+										)
+)
 public class Application 
 {
 
@@ -20,6 +47,24 @@ public class Application
 	}
 
 }
+
+/*
+ 
+ 																			#Swagger
+								
+# Here we have implemented spring security via security filter chain. so inorder to access swagger. u must specify the url in 
+# SecurityConfig class.
+				
+#swagger docs -for 2.x.x
+#URL: localhost:8080/swagger-ui.html
+
+
+#swagger docs-for 3.x.x (Currently used) 
+#URL:localhost:8080/swagger-ui/index.html (Use me)
+
+http://localhost:8080/v3/api-docs (Use me)
+
+ */
 
 
 /*
@@ -42,7 +87,7 @@ Reduced Boilerplate: Simplifies the code required for object mapping.
 Consistency: Ensures consistent mapping logic throughout the application.
 Maintainability: Makes it easier to maintain mapping logic as the application evolves.
 
-2. How to Implement ModelMapper into ypur project???
+2. How to Implement ModelMapper into your project???
 
 Ans:
 2.1. First inject the depenedency in pom.xml file

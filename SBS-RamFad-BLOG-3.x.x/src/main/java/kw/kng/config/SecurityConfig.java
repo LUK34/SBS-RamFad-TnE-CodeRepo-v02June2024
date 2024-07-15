@@ -14,11 +14,19 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import kw.kng.security.JwtAuthenticationEntryPoint;
 import kw.kng.security.JwtAuthenticationFilter;
 
 @Configuration
 @EnableMethodSecurity
+@SecurityScheme(
+		name= "Bear Authentication",
+		type=SecuritySchemeType.HTTP,
+		bearerFormat= "JWT",
+		scheme="bearer"
+)
 public class SecurityConfig
 {
 	private UserDetailsService uds;
@@ -57,6 +65,8 @@ public class SecurityConfig
 														authorize.requestMatchers(HttpMethod.GET,"/api/**").permitAll() 
 																		//.requestMatchers(HttpMethod.GET,"/api/categories/**").permitAll() 
 																		.requestMatchers("/api/auth/**").permitAll()
+																		.requestMatchers("/swagger-ui/**").permitAll()
+																		.requestMatchers("/v3/api-docs/**").permitAll()
 																		.anyRequest().authenticated()
 												).exceptionHandling(exception -> exception.authenticationEntryPoint(authenticationEntryPoint))
 												.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
