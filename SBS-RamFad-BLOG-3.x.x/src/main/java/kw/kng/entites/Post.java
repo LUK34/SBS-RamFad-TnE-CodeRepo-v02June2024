@@ -6,9 +6,12 @@ import java.util.Set;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
@@ -27,10 +30,11 @@ import lombok.NoArgsConstructor;
 											@UniqueConstraint(columnNames= {"title"})
 										  }
 )
-@EqualsAndHashCode(exclude = {"comments"})
+@EqualsAndHashCode(exclude = {"comments" ,  "category"})
 public class Post
 {
 	/* One Post -> Many Comments -> One to Many Mapping Bi-directional*/
+	/* 1 Category -> Many blog posts -> 1 to Many  Bi-Directional Mapping  */
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
@@ -46,6 +50,10 @@ public class Post
 	
 	@OneToMany(mappedBy="post", cascade = CascadeType.ALL, orphanRemoval= true)
 	private Set<Comment> comments = new HashSet<>();
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="category_id")
+	private Category category;
 	
 }
 

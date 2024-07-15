@@ -24,7 +24,7 @@ public class CommentDto
 	private String email;
 	
 	@NotEmpty(message="Comment Name must not be Empty")
-	@Size(max=30, message="Comment body size should not be more than 30 characters")
+	@Size(max=50, message="Comment body size should not be more than 50 characters")
 	private String body;
 
 }

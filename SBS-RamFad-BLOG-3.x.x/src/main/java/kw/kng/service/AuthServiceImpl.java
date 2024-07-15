@@ -17,6 +17,7 @@ import kw.kng.payload.LoginDto;
 import kw.kng.payload.RegisterDto;
 import kw.kng.repo.RoleRepo;
 import kw.kng.repo.UserRepo;
+import kw.kng.security.JwtTokenProvider;
 
 @Service
 public class AuthServiceImpl implements AuthService 
@@ -25,13 +26,20 @@ public class AuthServiceImpl implements AuthService
 	private UserRepo urepo;
 	private RoleRepo rrepo;
 	private PasswordEncoder passwordEncoder;
+	private JwtTokenProvider jwtTokenProvider;
 	
-	public AuthServiceImpl(AuthenticationManager am, UserRepo urepo, RoleRepo rrepo, PasswordEncoder passwordEncoder)
+	
+	public AuthServiceImpl(AuthenticationManager am, 
+			UserRepo urepo,
+			RoleRepo rrepo,
+			PasswordEncoder passwordEncoder,
+			JwtTokenProvider jwtTokenProvider)
 	{
 		this.am = am;
 		this.urepo = urepo;
 		this.rrepo = rrepo;
 		this.passwordEncoder = passwordEncoder;
+		this.jwtTokenProvider= jwtTokenProvider;
 	}
 
 	@Override
@@ -41,8 +49,11 @@ public class AuthServiceImpl implements AuthService
 				loginDto.getUsernameOrEmail(), loginDto.getPassword()));
 	
 		SecurityContextHolder.getContext().setAuthentication(authentication);
+	
+		String token = jwtTokenProvider.generateToken(authentication);
 		
-		return "User: " +loginDto.getUsernameOrEmail()+ " logged in successfully!!!";
+		//return "User: " +loginDto.getUsernameOrEmail()+ " logged in successfully!!!";
+		return token;
 	}
 
 	@Override

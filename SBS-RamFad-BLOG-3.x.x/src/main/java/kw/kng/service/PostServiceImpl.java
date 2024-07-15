@@ -9,31 +9,40 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import kw.kng.dto.PostDto;
 import kw.kng.dto.PostResponse;
+import kw.kng.entites.Category;
 import kw.kng.entites.Post;
 import kw.kng.exceptions.ResourceNotFoundException;
+import kw.kng.repo.CategoryRepo;
 import kw.kng.repo.PostRepo;
 
 @Service
 public class PostServiceImpl implements PostService 
 {
 	private PostRepo prepo;
+	private CategoryRepo crepo;
 	private ModelMapper modelMapper;
 
-	public PostServiceImpl(PostRepo prepo, ModelMapper modelMapper) 
+	public PostServiceImpl(PostRepo prepo,CategoryRepo crepo, ModelMapper modelMapper) 
 	{
 		this.prepo = prepo;
+		this.crepo=crepo;
 		this.modelMapper= modelMapper;
 	}
 
 	@Override
 	public PostDto createPostSingle(PostDto postDto) 
 	{
+		//Find whether the `category id` for that given `post` exist or not. If exist transfer that `category id` to `Category` ENTITY.
+		Category category = crepo.findById(postDto.getCategoryId()).orElseThrow(() -> new ResourceNotFoundException("The Category id: "+postDto.getCategoryId()+" for the given Post does not exist in DB!!!"));
+		
 		// Transfer DTO to ENTITY
 		Post post = modelMapper.map(postDto, Post.class);
+		post.setCategory(category);
 		
 		//Save the ENTITY details into PERSISTANCE layer
 		Post savedPost = prepo.save(post);
@@ -43,18 +52,30 @@ public class PostServiceImpl implements PostService
 				
 	}
 
+	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	@Override
 	public List<PostDto> createPostMultiple(List<PostDto> postDto)
 	{
 		// Transfer the List of POST from DTO to ENTITY
-		List<Post> postList = postDto.stream().map(dto -> modelMapper.map(dto, Post.class)).collect(Collectors.toList());
+		List<Post> postList = postDto.stream().map(dto -> 
+		{	
+			//Map each DTO to ENTITY
+			Post post = modelMapper.map(dto, Post.class);
+			
+			//Find whether the `category id` for that given `post` exist or not. If exist transfer that `category id` to `Category` ENTITY.
+			Category category = crepo.findById(dto.getCategoryId()).orElseThrow(() -> new ResourceNotFoundException("The Category id: "+dto.getCategoryId()+" for the given Post does not exist in DB!!!"));
 		
+			post.setCategory(category);
+			
+			return post;
+			
+		}).collect(Collectors.toList());
+				
 		//Save the List of POST in ENTITY using PERSISTENCE
 		List<Post> savedPostList = prepo.saveAll(postList);
 		
 		//Transfer savedPostList to DTO
 		return  savedPostList.stream().map(d -> modelMapper.map(d, PostDto.class)).collect(Collectors.toList());
-
 		
 	}
 
@@ -91,7 +112,8 @@ public class PostServiceImpl implements PostService
 	//	return content;
 			return postResponse;
 	}
-
+	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
 	@Override
 	public List<PostDto> getAllPostList()
 	{
@@ -104,8 +126,6 @@ public class PostServiceImpl implements PostService
 
 	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
-	
-	
 	@Override
 	public PostDto getPostById(Long postId) 
 	{
@@ -115,17 +135,23 @@ public class PostServiceImpl implements PostService
 		//Transfer ENTITY to DTO
 		return modelMapper.map(post, PostDto.class);
 	}
-
+	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
 	@Override
 	public PostDto updatePost(Long postId, PostDto postDto) 
 	{
 		//Search in DB if the data exist or not. If not throw `ResourceNotFoundException`
 		Post post = prepo.findById(postId).orElseThrow(() -> new ResourceNotFoundException("Post with id:  "+postId+"  does not exist in DB."));
+	
+		//Find whether the `category id` for that given `post` exist or not. If exist transfer that `category id` to `Category` ENTITY.
+		Category category = crepo.findById(postDto.getCategoryId()).orElseThrow(() -> new ResourceNotFoundException("The Category id: "+postDto.getCategoryId()+" for the given Post does not exist in DB!!!"));
+				
 		
 		//Transfer the DTO details to ENTITY
 		post.setTitle(postDto.getTitle());
 		post.setDescription(postDto.getDescription());
 		post.setContent(postDto.getContent());
+		post.setCategory(category);
 		
 		//Save the ENTITY details to PERSISTANCE
 		Post updatedPost = prepo.save(post);
@@ -133,7 +159,8 @@ public class PostServiceImpl implements PostService
 		//Transfer ENTITY to DTO
 		return modelMapper.map(updatedPost, PostDto.class);
 	}
-
+	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
 	@Override
 	public void deletePostById(Long postId) 
 	{
@@ -141,9 +168,22 @@ public class PostServiceImpl implements PostService
 		Post post = prepo.findById(postId).orElseThrow(() -> new ResourceNotFoundException("Post with id:  "+postId+"  does not exist in DB."));
 				
 		//Delete the POST in PERSISTENCE
-		prepo.deleteById(postId);
+		prepo.delete(post);
 	}
-
+	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	@Override
+	public List<PostDto> getPostsByCategory(Long categoryId) 
+	{
+		//Find whether the `category id` for that given `post` exist or not. If exist transfer that `category id` to `Category` ENTITY.
+		Category category = crepo.findById(categoryId).orElseThrow(() -> new ResourceNotFoundException("The Category id: "+categoryId+" for the given Post does not exist in DB!!!"));
+	
+		List<Post> posts= prepo.findByCategoryId(categoryId);
+		
+		return posts.stream().map((p) -> modelMapper.map(p, PostDto.class)).collect(Collectors.toList());
+		
+	}
+	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
 	
 	

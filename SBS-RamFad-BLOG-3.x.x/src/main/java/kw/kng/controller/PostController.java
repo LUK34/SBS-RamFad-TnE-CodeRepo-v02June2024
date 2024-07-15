@@ -99,5 +99,13 @@ public class PostController
 	}
 	
 	
+	//GET - Get POSTS by categoryId
+	@GetMapping("/category/{id}")
+		public ResponseEntity<List<PostDto>> getPostsByCategory(@PathVariable("id") Long categoryId)
+		{
+			List<PostDto> postDto = ps.getPostsByCategory(categoryId);
+			return ResponseEntity.ok(postDto);
+		}
+	
 	
 }

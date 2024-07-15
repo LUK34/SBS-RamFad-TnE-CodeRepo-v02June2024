@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
+import kw.kng.payload.JwtAuthResponse;
 import kw.kng.payload.LoginDto;
 import kw.kng.payload.RegisterDto;
 import kw.kng.service.AuthService;
@@ -25,11 +26,14 @@ public class AuthController
 	
 	//Build Login REST API
 	@PostMapping(value = {"/login", "/signin"})
-	public ResponseEntity<String> login(@RequestBody @Valid LoginDto loginDto)
+	public ResponseEntity<JwtAuthResponse> login(@RequestBody @Valid LoginDto loginDto)
 	{
-		String response = as.login(loginDto);
+		String token = as.login(loginDto);
 		
-		return ResponseEntity.ok(response);
+		JwtAuthResponse jwtAuthResponse = new JwtAuthResponse();
+		jwtAuthResponse.setAccessToken(token);
+		
+		return ResponseEntity.ok(jwtAuthResponse);
 	}
 
 	//Build Register REST API
@@ -43,3 +47,34 @@ public class AuthController
 	
 
 }
+
+
+/*
+ 
+ 1. For JWT Token
+ 
+ Type: POST,  raw,  JSON
+ 
+ Input: 
+ {
+    "usernameOrEmail": "zapdos",
+    "password": "zapdos"
+}
+ 
+ Output:
+ 
+ {
+    "accessToken": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ6YXBkb3NAZ21haWwuY29tIiwiaWF0IjoxNzIwODkzNDQ4LCJleHAiOjE3MjE0OTgyNDh9.hOQZKLuvfFmAjQxOAZFNz3EvnMPYIpIxGAAma7n9WzFjJsd3AnxTeyj-xVvvLgOE",
+    "tokenType": "Bearer"
+}
+  
+ As per the Output the JWT Token has 3 part:
+ * First Part -> eyJhbGciOiJIUzM4NCJ9
+ * Second Part -> eyJzdWIiOiJ6YXBkb3NAZ21haWwuY29tIiwiaWF0IjoxNzIwODkzNDQ4LCJleHAiOjE3MjE0OTgyNDh9
+ * Third Part -> hOQZKLuvfFmAjQxOAZFNz3EvnMPYIpIxGAAma7n9WzFjJsd3AnxTeyj-xVvvLgOE
+ 
+ 
+ 
+ */
+
+

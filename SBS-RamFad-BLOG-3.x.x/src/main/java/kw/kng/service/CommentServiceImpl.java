@@ -121,7 +121,7 @@ public class CommentServiceImpl implements CommentService
         	 throw new BlogApiException("Comment with id= "+commentId+" does not belong to post with id= "+postId);
         }
 
-		crepo.deleteById(commentId);
+		crepo.delete(commentById);
 		
 	}
 
