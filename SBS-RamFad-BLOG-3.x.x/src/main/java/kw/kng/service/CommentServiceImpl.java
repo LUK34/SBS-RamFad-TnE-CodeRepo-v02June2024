@@ -38,6 +38,7 @@ public class CommentServiceImpl implements CommentService
 		//Retrieve Post ENTITY by id;
 		Post post = prepo.findById(postId).orElseThrow(() -> new ResourceNotFoundException("Post with id: "+postId+"  does not exist in DB."));
 		
+		
 		//Set post to Comment ENTITY
 		comment.setPost(post);
 		
