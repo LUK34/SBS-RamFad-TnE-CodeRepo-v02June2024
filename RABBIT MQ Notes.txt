@@ -1,0 +1,73 @@
+1. Install RABBITMQ in docker application( Ramesh Fadatare Microservice course)
+
+2. Make sure you have Docker and create a docker account.( Already done)
+
+3. Command to install RABBITMQ via the command prompt:
+CMD:
+docker pull rabbitmq:3.13.4-management
+
+4. After installing the RABBIT MQ via CMD prompt. Go to docker application. Under the `Images` (sidebar option),
+ you will the `rabbitmq` image. 
+
+5. To run the `rabbitmq` image click on the play button. This will run the `rabbitmq`image.
+
+6. But we will be using the below cmd to start the docker application via the CM prompt.
+
+CMD:
+docker run --rm -it -p 15672:15672 -p 5672:5672 rabbitmq:3.13.4-management
+
+Notes:
+* rabbitmq:3.13.4-management : This is docker version that s currently installed in your computer.
+* Port 15672 is for the RabbitMQ management website.
+* Port: 5762 is for the RabbitMQ client connections.
+
+7. On running the above docker command. Make sure that the last 4 lines be seen in the application:
+
+line:
+
+2024-07-18 05:34:28.444106+00:00 [info] <0.696.0>  * rabbitmq_prometheus
+2024-07-18 05:34:28.444106+00:00 [info] <0.696.0>  * rabbitmq_federation
+2024-07-18 05:34:28.444106+00:00 [info] <0.696.0>  * rabbitmq_management
+2024-07-18 05:34:28.444106+00:00 [info] <0.696.0>  * rabbitmq_management_agent
+2024-07-18 05:34:28.444106+00:00 [info] <0.696.0>  * rabbitmq_web_dispatch
+2024-07-18 05:34:28.486341+00:00 [info] <0.9.0> Time to start RabbitMQ: 5942 ms
+
+8. After executing step 6 and verifying step 7. Go to chrome browser and type the below url
+
+Url:localhost:15672
+
+You will see the RabbitMQ login screen. Type guest/guest
+
+9. Under the RabbitMQ application. You can see `Channels` tab. Whenever the producer and consumer connect. That connection can be seen in
+`Channels` tab.
+
+10. Go to `Exchange` tab and for starters. we have to create a new exchange by clicking on the `Add a new exchange` tab.
+
+11. Step 10 had been done. The exchange that had been created is called `exchange_demo`.
+
+12. After creating an exchange in `Exchange` tab. Go and click on `Queue` tab and create a `queue`.
+
+14. To create a queue click on `Add a new queue` tab.
+14.1 Select the `Type` dropdown option as `Classic`.
+14.2 Give the `Name` as `queue_demo`
+14.3 Give the `Durability` dropdown option as `Durable`.
+14.4 Give the `Auto delete` dropdown option as `No`
+14.5 Click on `Add queue`.
+
+
+15. Step 14 is already done ->`queue_demo`
+
+16. After creating exchange and queue. We need to bind the exchange and queue.
+16.1 Go to exchange tab and select the `exchange_demo` link. Go to `Bindings` tab to bind the exchange and queue.
+16.2 Under the `To queue` dropdown option(this should be the selected option) type the queue name: `queue_demo`.
+16.3 Under the `Routing key`, give the name as `routing_key_demo`.
+
+So the basic ideas is we have to bind exchange `exchange_demo` and queue `queue_demo` with the Routing key `routing_key_demo`.
+
+
+
+
+
+
+
+

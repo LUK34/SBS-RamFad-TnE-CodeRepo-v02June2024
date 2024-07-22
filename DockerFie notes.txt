@@ -1,0 +1,345 @@
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+Docker can build the image automatically by reading the instructions from Dockerfile.
+A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image.
+It means that Dockerfile is nothing but a text file that contains all the commands or instructions required to build a Docker image and 
+the Dockerfile name should be `Dockerfile`.
+
+We are going to use `eclipse-temurin` as official Dockerimage. Create a file`Dockerfile`and enter the below commands:
+
+CMD:
+-----
+FROM eclipse-temurin:17
+
+LABEL mentainer="lukerajan.mathew@gmail.com"
+
+WORKDIR /app
+
+COPY target/sbs-docker-demo-0.0.1-SNAPSHOT.jar /app/sbs-docker-demo.jar
+
+ ENTRYPOINT  ["java", "-jar", "sbs-docker-demo.jar"]
+
+Description:
+-------------
+
+1. FROM eclipse-temurin:17
+This line specifies the base image for the Docker image you are building.
+In this case, it is using the eclipse-temurin:17 image, which is an official Docker image that contains the OpenJDK 17 runtime.
+This is necessary for running Java applications.
+
+2. LABEL mentainer="lukerajan.mathew@gmail.com"
+This line adds metadata to the Docker image. The LABEL instruction allows you to specify key-value pairs. 
+Here, it's adding a maintainer label with the email address "lukerajan.mathew@gmail.com". 
+This is useful for identifying the person or organization responsible for maintaining the image.
+
+3. WORKDIR /app
+This line sets the working directory inside the container to /app.
+Any subsequent COPY, ADD, RUN, and other commands will be executed in this directory.
+If the directory does not exist, it will be created.
+
+4. COPY target/sbs-docker-demo-0.0.1-SNAPSHOT.jar /app/sbs-docker-demo.jar
+This line copies the sbs-docker-demo-0.0.1-SNAPSHOT.jar file from the target directory on your local machine 
+(typically where Maven or Gradle builds the JAR file) to the /app directory inside the Docker image and renames it to sbs-docker-demo.jar. 
+This step is crucial for packaging your application within the Docker image.
+
+5. ENTRYPOINT ["java", "-jar", "sbs-docker-demo.jar"]
+This line specifies the command that will be run when a container based on this image is started. 
+The ENTRYPOINT instruction sets the main command to be executed. 
+In this case, it runs the Java application by executing the java -jar sbs-docker-demo.jar command.
+This tells Docker to run the Java application using the JAR file copied earlier.
+
+Summary:
+---------
+The Dockerfile starts by pulling a base image with OpenJDK 17.
+It adds metadata about the maintainer.
+It sets the working directory inside the container.
+It copies the JAR file of your application into the container.
+It specifies the command to run your Java application when the container starts.
+Together, these commands create a Docker image that contains your Java application and is capable of running it when the container starts.
+
+------------------------------------------------------------------------------------------------------------------------------------------
+Inside the springboot application. Open the CMD and type the below command:
+
+* If you want to build the dockerfile for that application. Go inside the folder of the application.
+
+cmd:
+-----
+docker build -t springboot-docker-demo .
+
+Description:
+----------------
+The command `docker build -t springboot-docker-demo . `
+It is used to build a Docker image from a Dockerfile located in the current directory. 
+Here's a detailed breakdown of what each part of the command does:
+
+`docker build`: 
+--------------
+This is the Docker command used to build an image from a Dockerfile.
+
+`-t springboot-docker-demo`:
+-----------------------------
+ The `-t` option tags the image with a name. In this case, the image will be tagged as `springboot-docker-demo`. 
+This makes it easier to reference the image later when running a container or pushing the image to a repository.
+
+` .` (dot):
+---------
+ This specifies the build context. The dot ` .` indicates that the Docker build context is the current directory. 
+Docker will look for a Dockerfile in this directory and use it to build the image.
+
+------------------------------------------------------------------------------------------------------------------------------------------
+The below command is used to list all Docker images that are currently stored on your local Docker environment.
+Here is a detailed explanation of what the command does:
+
+cmd:
+-----
+docker images
+
+Description:
+----------------
+This is the Docker command that lists all the Docker images that are available locally on your machine. When you run docker images,
+you will see a table that provides information about the images. The table typically includes the following columns:
+
+* `REPOSITORY`:
+------------ 
+The name of the repository to which the image belongs. This is often the name you give to the image when you build it (e.g., springboot-docker-demo).
+
+* `TAG`:
+------------
+The tag of the image. Tags are used to identify different versions of the same image. Common tags include latest or version numbers (e.g., latest, 1.0, 17).
+
+* `IMAGE ID`:
+------------
+The unique identifier for the image. This is a hexadecimal string that Docker uses internally to reference the image.
+
+* `CREATED`:
+------------
+The time when the image was created.
+
+* `SIZE`:
+------------
+The size of the image.
+------------------------------------------------------------------------------------------------------------------------------------------
+
+The below command is used to create and start a new Docker container from the sbs-docker-demo image, with port mapping specified.
+
+##########################################################################################
+Scenario 1: Standard way to run the `jar` file with port:8080 in docker using CMD
+##########################################################################################
+
+CMD:
+-----
+docker run -p 8080:8080 sbs-docker-demo
+
+Description:
+---------------
+* `docker run`: This is the Docker command used to create and start a new container from a specified Docker image.
+* `-p 8080:8080`: This option maps a port on the host machine to a port inside the Docker container.
+* The first `8080` is the port on the host machine.
+* The second `8080` is the port inside the Docker container.
+* This means that any traffic sent to port 8080 on the host machine will be forwarded to port 8080 inside the container.
+* `sbs-docker-demo`: This is the name of the Docker image to use for creating the container. Docker will look for an image with this name in the local image repository.
+
+If it does not find the image locally, it will try to pull it from a Docker registry like Docker Hub.
+
+On executing the above command we will get a console result which is similar to how we run the springboot application in STS. This is a JAR file.
+So what is happening is like in the above point `This means that any traffic sent to port 8080 on the host machine will be forwarded to port 8080 inside the container.`
+
+Similary, if we want to change the application port from 8080 to any other port say 8081 and forward it to port 8080 inside the container.
+
+##########################################################################################
+Scenario 2: Standard way to run the `jar` file with port:8081 in docker using CMD
+##########################################################################################
+
+CMD:
+-----
+docker run -p 8081:8080 sbs-docker-demo
+
+#######################################################################################################################################
+Scenario 3: Standard way to run the `jar` file with port:8081 in docker using CMD but in detached mode.(Running in background)
+#######################################################################################################################################
+
+CMD:
+-----
+docker run -p 8081:8080 -d sbs-docker-demo
+
+Description:
+-------------
+* `docker run`: This command creates and starts a new Docker container from a specified image.
+* `-p 8081:8080`: This option maps port 8081 on your host machine to port 8080 inside the Docker container. 
+* This means that any traffic sent to port `8081` on the host machine will be forwarded to port `8080` inside the container.
+* `-d`: This option runs the container in detached mode, which means it runs in the background.
+* `sbs-docker-demo`: This is the name of the Docker image used to create the container.
+* The output `4a758ae5c86f425794681af4d8521117f64b04ecab767e5c956cba161d9b6ab3` is the unique container ID of the newly created container.
+
+CMD:
+-----
+docker logs -f 4a75
+
+Description:
+--------------
+* `docker logs`: This command fetches the logs of a container.
+* `-f`: This option follows the log output, meaning it continuously displays new log entries as they are generated.
+* `4a75`: This is a shortened version of the container ID. Docker allows you to use unique prefixes of the container ID.
+* The log output shows the startup sequence of a Spring Boot application, indicating that the application is initializing and starting Tomcat on port 8080 inside the container.
+
+CMD:
+-----
+docker ps
+
+OUTPUT:
+-------
+CONTAINER ID   IMAGE             COMMAND                  CREATED          STATUS          PORTS                    NAMES
+4a758ae5c86f   sbs-docker-demo   "java -jar sbs-docke…"   27 seconds ago   Up 26 seconds   0.0.0.0:8081->8080/tcp   quizzical_heyrovsky
+
+Description:
+--------------
+* `CONTAINER ID`: The unique ID of the container.
+* `IMAGE`: The Docker image used to create the container (sbs-docker-demo).
+* `COMMAND`: The command that is running inside the container (java -jar sbs-docker-demo.jar).
+* `CREATED`: The time when the container was created.
+* `STATUS`: The current status of the container (e.g., Up 26 seconds).
+* `PORTS`: The port mappings (0.0.0.0:8081->8080/tcp), indicating that port 8081 on the host is mapped to port 8080 inside the container.
+* `NAMES`: The name Docker automatically assigned to the container (quizzical_heyrovsky).
+
+In order to stop the detached JAR file from running. Execute the below command.
+
+CMD:
+-----
+docker stop 4a75
+
+OUTPUT:
+--------
+
+D:\SBS-KNG\sbs-docker-demo>docker stop 4a75
+4a75
+
+D:\SBS-KNG\sbs-docker-demo>docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+###############################################################
+Scenario: How to PUSH Docker image to DockerHub ???
+###############################################################
+
+1. Go to DockerHub and login.
+2. Go to the `Repository` tab. This is the tab that will display all the docker images that were pushed from local computer to Docker hub.
+3. In order to push the docker image from local computer to DockerHub. First log in to dockerhub via cmd of local computer.
+CMD:
+-------
+docker login
+
+Output:
+--------
+Authenticating with existing credentials...
+Login Succeeded
+
+4. If you get the output from step 3. It means that the login is successful.
+
+5. The command `docker tag sbs-docker-demo lukerajanmathew04/sbs-docker-demo:0.1.RELEASE` is used to create a new tag for an existing Docker image.
+Here is a detailed explanation of what each part of the command does:
+
+CMD:
+-----
+docker tag sbs-docker-demo lukerajanmathew04/sbs-docker-demo:0.1.RELEASE
+
+Description:
+--------------
+* docker tag: This is the Docker command used to create a new tag for an existing image.
+* sbs-docker-demo: This is the name of the existing Docker image that you want to tag.
+* lukerajanmathew04/sbs-docker-demo:0.1.RELEASE: This is the new tag you want to create for the image.
+* lukerajanmathew04: This is the Docker Hub username or namespace.
+* sbs-docker-demo: This is the name of the image under the specified namespace.
+* 0.1.RELEASE: This is the specific tag or version you are assigning to the image.
+
+6. The command docker push lukerajanmathew04/sbs-docker-demo:0.1.RELEASE is used to upload a Docker image to a Docker registry,
+such as Docker Hub. Here's a detailed explanation of what each part of the command does
+
+CMD:
+----
+docker push lukerajanmathew04/sbs-docker-demo:0.1.RELEASE
+
+Description:
+--------------
+* docker push: This is the Docker command used to upload an image to a Docker registry.
+* lukerajanmathew04/sbs-docker-demo:0.1.RELEASE: This is the name and tag of the image you want to push. It includes:
+* lukerajanmathew04: The Docker Hub username or namespace where the image will be stored.
+* sbs-docker-demo: The name of the image.
+* 0.1.RELEASE: The tag or version of the image.
+
+The docker push lukerajanmathew04/sbs-docker-demo:0.1.RELEASE command uploads the specified Docker image (including its layers) to your Docker Hub repository,
+making it available for others to pull and use. This is a common step in the process of distributing Docker images, 
+allowing for easy sharing and deployment across different environments.
+
+
+D:\SBS-KNG\sbs-docker-demo>docker login
+Authenticating with existing credentials...
+Login Succeeded
+
+D:\SBS-KNG\sbs-docker-demo>docker tag sbs-docker-demo lukerajanmathew04/sbs-docker-demo:0.1.RELEASE
+
+D:\SBS-KNG\sbs-docker-demo>docker images
+REPOSITORY                          TAG                 IMAGE ID       CREATED        SIZE
+sbs-docker-demo                     0.1.RELEASE         78b6f18b5701   5 hours ago    428MB
+sbs-docker-demo                     latest              78b6f18b5701   5 hours ago    428MB
+lukerajanmathew04/sbs-docker-demo   0.1.RELEASE         78b6f18b5701   5 hours ago    428MB
+mysql                               latest              e9387c13ed83   2 months ago   578MB
+rabbitmq                            3.13.4-management   84c25f504c92   5 months ago   251MB
+
+D:\SBS-KNG\sbs-docker-demo>docker images
+REPOSITORY                          TAG                 IMAGE ID       CREATED        SIZE
+lukerajanmathew04/sbs-docker-demo   0.1.RELEASE         78b6f18b5701   5 hours ago    428MB
+sbs-docker-demo                     0.1.RELEASE         78b6f18b5701   5 hours ago    428MB
+sbs-docker-demo                     latest              78b6f18b5701   5 hours ago    428MB
+mysql                               latest              e9387c13ed83   2 months ago   578MB
+rabbitmq                            3.13.4-management   84c25f504c92   5 months ago   251MB
+
+D:\SBS-KNG\sbs-docker-demo>docker push lukerajanmathew04/sbs-docker-demo:0.1.RELEASE
+The push refers to repository [docker.io/lukerajanmathew04/sbs-docker-demo]
+797f22c9609e: Pushed
+ac614675e3b3: Pushed
+d9a94761e6ac: Mounted from library/eclipse-temurin
+c0205e8830ee: Mounted from library/eclipse-temurin
+fd5f95e603b6: Mounted from library/eclipse-temurin
+6e9a204c7212: Mounted from library/eclipse-temurin
+931b7ff0cb6f: Mounted from library/eclipse-temurin
+0.1.RELEASE: digest: sha256:19c7255b9ba9eee133a0ace4bacb5c3af31b8d8bbe35ff1f0310dd8d73c1d5d8 size: 1786
+
+
+###############################################################
+Scenario: How to PULL Docker image to DockerHub ???
+###############################################################
+
+The command `docker pull lukerajanmathew04/sbs-docker-demo:0.1.RELEASE` is used to download a Docker image from a Docker registry, 
+such as Docker Hub, to your local machine. Here's a detailed explanation of what each part of the command does:
+
+CMD:
+------
+docker pull lukerajanmathew04/sbs-docker-demo:0.1.RELEASE
+
+Description:
+--------------
+* `docker pull`: This is the Docker command used to download (pull) an image from a Docker registry.
+
+* `lukerajanmathew04/sbs-docker-demo:0.1.RELEASE`: This specifies the name and tag of the image you want to pull. It includes:
+
+* `lukerajanmathew04`: The Docker Hub username or namespace from which the image will be pulled.
+
+* `sbs-docker-demo`: The name of the image.
+
+* `0.1.RELEASE`: The tag or version of the image.
+
+
+Refer video 196: how to pull MySQL db through command prompt. (Go through it. Dont do it as it is already installed).
+
+
+
+
+
+
+
+
+
+
+
+
