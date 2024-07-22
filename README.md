@@ -127,5 +127,11 @@ This will teach you how to handle inconsistent data (Rollback) if there is data 
 - Implemented SecurityFilterChain for 3.x.x
 - Implemented JWT Token (HashCode: 9956224061c0fa7b2275221cf3829ebf4d8674fa)
 - Versioning through URI Path(HashCode: 3a9fca681cc3432a2e021854769e93d4dc5573cc)
-	
-	
+
+## 15.SBS-RamFad-BLOG-2.x.x
+- **Course:** Build REST APIs using Spring Boot, Spring Security 6, JWT, Spring Data JPA, Hibernate, MySQL, Docker &amp; Deploy on AWS
+- **FileName:** SBS-RamFad-BLOG-2.x.x	
+
+
+### Description:
+- This is downscaled version of the previous. (3.3.1) to (2.7.6).
