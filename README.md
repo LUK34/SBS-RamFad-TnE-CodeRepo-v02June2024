@@ -147,7 +147,6 @@ This will teach you how to handle inconsistent data (Rollback) if there is data 
 - **Course:** Build REST APIs using Spring Boot, Spring Security 6, JWT, Spring Data JPA, Hibernate, MySQL, Docker &amp; Deploy on AWS
 - **FileName: ** rest-crud-docker
 
-
 ### Description:
 - As per what you did 3306 will not work in your local docker hub. You followed chatGPT4o advice and some how generated the jar file
 - After generating the jar. You followed Section 28: docker-compose.yml file . You did not follow the exact tutorial because it will
