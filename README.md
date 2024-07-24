@@ -128,16 +128,35 @@ This will teach you how to handle inconsistent data (Rollback) if there is data 
 - Implemented JWT Token (HashCode: 9956224061c0fa7b2275221cf3829ebf4d8674fa)
 - Versioning through URI Path(HashCode: 3a9fca681cc3432a2e021854769e93d4dc5573cc)
 
-## 15.SBS-RamFad-BLOG-2.x.x
+## 16.SBS-RamFad-BLOG-2.x.x
 - **Course:** Build REST APIs using Spring Boot, Spring Security 6, JWT, Spring Data JPA, Hibernate, MySQL, Docker &amp; Deploy on AWS
 - **FileName:** SBS-RamFad-BLOG-2.x.x	
 
 ### Description:
 - This is downscaled version of the previous, (3.3.1) to (2.7.6).
 
-## 16.sbs-docker-demo
+## 17.sbs-docker-demo
 - **Course:** Build REST APIs using Spring Boot, Spring Security 6, JWT, Spring Data JPA, Hibernate, MySQL, Docker &amp; Deploy on AWS
 - **FileName:** sbs-docker-demo
 
 ### Description:
 - This is sample programme that is deployed in dockerhub. Refer the note `DockerFie notes` which is KT for beginners.	
+
+
+## 18.rest-crud-docker
+- **Course:** Build REST APIs using Spring Boot, Spring Security 6, JWT, Spring Data JPA, Hibernate, MySQL, Docker &amp; Deploy on AWS
+- **FileName: ** rest-crud-docker
+
+
+### Description:
+- As per what you did 3306 will not work in your local docker hub. You followed chatGPT4o advice and some how generated the jar file
+- After generating the jar. You followed Section 28: docker-compose.yml file . You did not follow the exact tutorial because it will
+- Refer `docker-compose.yml` , `Dockerfile` , `application-docker_prody.properties`, `DockerFile notes`. You need to practice Docker commands.
+
+
+
+
+
+
+
+
