@@ -114,6 +114,7 @@ This will teach you how to handle inconsistent data (Rollback) if there is data 
   - FeignClient (Code Commit Hash Code: b007e310451fc462fe504f7f0b2da680a2bedcf4)  ->**Currently used for microservice communication** 
 - Implemented API Gateway Routes(Code Commit Hash Code: 65b2a471e8f22380b53e0c506ee97f274f3984cd) manual (**Best**) and automatic.
 - Implemented Zipkin(3.x.x -> lot of difference is there in this than in 2.x.x).Refer Video 133.
+- Zipkin Url: http://127.0.0.1:9411/zipkin
   
 ## 15.SBS-RamFad-BLOG-3.x.x
 - **Course:** Build REST APIs using Spring Boot, Spring Security 6, JWT, Spring Data JPA, Hibernate, MySQL, Docker &amp; Deploy on AWS
@@ -128,6 +129,10 @@ This will teach you how to handle inconsistent data (Rollback) if there is data 
 - Implemented SecurityFilterChain for 3.x.x
 - Implemented JWT Token (HashCode: 9956224061c0fa7b2275221cf3829ebf4d8674fa)
 - Versioning through URI Path(HashCode: 3a9fca681cc3432a2e021854769e93d4dc5573cc)
+- AWS Link: http://lrmblogrestapp-env.eba-4wkg3b5n.us-east-1.elasticbeanstalk.com
+- AWS Url -> {{url_prod}} -> http://lrmblogrestapp-env.eba-4wkg3b5n.us-east-1.elasticbeanstalk.com
+- AWS Deployment video refer -> Video 186,187 and you need to refer youtube video as changes are there in AWS 
+- AWS Youtube Link -> https://www.youtube.com/watch?v=cfO5mfI_EdM
 
 ## 16.SBS-RamFad-BLOG-2.x.x
 - **Course:** Build REST APIs using Spring Boot, Spring Security 6, JWT, Spring Data JPA, Hibernate, MySQL, Docker &amp; Deploy on AWS

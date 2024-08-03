@@ -1,0 +1,672 @@
+{
+	"info": {
+		"_postman_id": "fe873ceb-c111-4566-b02c-4c59a362f214",
+		"name": "Blog-RamFad",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32069751"
+	},
+	"item": [
+		{
+			"name": "Create Post -Single -POST",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJyYXBpZGFzaEBnbWFpbC5jb20iLCJpYXQiOjE3MjI3MTQ1NDEsImV4cCI6MTcyMzMxOTM0MX0.wj14DtiNjI-NdMg1-TwX0xoCkU8Mf5RC17HzVvccelGLlkmE0x8r2sMLyAHAbTad",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\":\"Post 8790\",\r\n    \"description\":\"Post 8790 description\",\r\n    \"content\": \"This is Post 8790 description\",\r\n    \"categoryId\":2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/posts/single",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"posts",
+						"single"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Post -Multiple -POST",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3MjE1MzY4NjksImV4cCI6MTcyMjE0MTY2OX0.KGFirgaWHjeKb0U7lmt2bd3MSpoYqi6izAi8yd-Q0nK0PVB0gZZnNhmX8F44PE4V",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n    \"title\":\"Post 123987\",\r\n    \"description\":\"Post 123987 description\",\r\n    \"content\": \"This is Post 123987 description\",\r\n    \"categoryId\":2\r\n    },\r\n    {\r\n        \"title\":\"Post 123487\",\r\n        \"description\":\"Post 123487 Description\",\r\n        \"content\": \"This is Post 123487 Description\",\r\n        \"categoryId\":1\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_prod}}/api/posts/multiple",
+					"host": [
+						"{{url_prod}}"
+					],
+					"path": [
+						"api",
+						"posts",
+						"multiple"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All post by PAGE-GET",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/posts/post-page?pageNo=1&pageSize=7&sortBy=title&sortDir=asc",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"posts",
+						"post-page"
+					],
+					"query": [
+						{
+							"key": "pageNo",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "7"
+						},
+						{
+							"key": "sortBy",
+							"value": "title"
+						},
+						{
+							"key": "sortDir",
+							"value": "asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Post by LIST - GET",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/posts/post-list",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"posts",
+						"post-list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Post by id -PUT",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3MjEwMjE1OTMsImV4cCI6MTcyMTYyNjM5M30.YA6p9XaKtk5Ii7m2ZONg0eI-KUzf3ZjhqCh31INSHqXwu_S9SM0dQuThiqgZJ9Og",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"title\": \"Post 56789\",\r\n    \"description\": \"Post 56789 Description\",\r\n    \"content\": \"This is Post 56789 Description\",\r\n    \"categoryId\": 11\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/posts/35",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"posts",
+						"35"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Post by id -DELETE",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3MjE1Mzk2NDksImV4cCI6MTcyMjE0NDQ0OX0.zq3zCdvXLLyLRp0z_mViNdT1zAcFMrg5hY7lQHuUKlHBY0HGaEpm4HqocnbwtNT-",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/posts/36",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"posts",
+						"36"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Comment by Post id -POST",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ6YXBkb3NAZ21haWwuY29tIiwiaWF0IjoxNzIyNzA0NzgwLCJleHAiOjE3MjMzMDk1ODB9.2LVHtX3jxi1-ndGbvtap5TkvexIezuhNggsgEOudfmSS9Ff5OvzH5QfpkVjjj1m9",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"PQRS_TUVW\",\r\n    \"email\": \"hij@gmail.com\",\r\n    \"body\": \"PQRS_TUVW body\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/posts/36/comments/single",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"posts",
+						"36",
+						"comments",
+						"single"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Post by id - GET",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-API-VERSION",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/api/posts/34",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"posts",
+						"34"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Comment by Post id - GET",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/posts/36/comments",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"posts",
+						"36",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Comment by Comment Id, Post Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/posts/36/comments/24",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"posts",
+						"36",
+						"comments",
+						"24"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Comment by Comment Id, Post Id -PUT",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Mrs Baraberala\",\r\n    \"email\": \"barbenheimer@gmail.com\",\r\n    \"body\": \"This is Mrs Barberala\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/posts/2/comments/8",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"posts",
+						"2",
+						"comments",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Comment by comment id, Post Id -DELETE",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3MjE1Mzc2MTAsImV4cCI6MTcyMjE0MjQxMH0.SKbSCx7Mx5MkRlLAMbsXqgjQklMn6drHYvseaSIqHKGogeXOHpUFnCOprF2gzuz9",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/posts/36/comments/21",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"posts",
+						"36",
+						"comments",
+						"21"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login - POST",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"usernameOrEmail\": \"admin@gmail.com\",\r\n    \"password\": \"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_prod}}/api/auth/login",
+					"host": [
+						"{{url_prod}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register - POST",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"rapidash\",\r\n    \"username\": \"rapidash\",\r\n    \"email\": \"rapidash@gmail.com\",\r\n    \"password\": \"rapidash\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_prod}}/api/auth/register",
+					"host": [
+						"{{url_prod}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Category-Single-POST",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3MjEyNzc1NTgsImV4cCI6MTcyMTg4MjM1OH0.vJIdp-pLngUL7A8J1uacXycjfIgut58C62akLrSCKbBt99DDvXL7BZ5KLYWOjoEh",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"KLMNO\",\r\n    \"description\":\"This is KLMNO Library\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/categories/single",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"categories",
+						"single"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Category-Multiple-POST",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3MjI3MTQ2NzksImV4cCI6MTcyMzMxOTQ3OX0.G3Q47H5PHQ29q-3Q1oetd38gRuOB1-PSIE8t7gFya1LM4RWcbeMLwZoO9GehLFlG",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"name\":\"PQRST\",\r\n        \"description\":\"This is PQRST\"\r\n    },\r\n    {\r\n        \"name\":\"UVWXY\",\r\n        \"description\":\"This is UVWXY\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_prod}}/api/categories/multiple",
+					"host": [
+						"{{url_prod}}"
+					],
+					"path": [
+						"api",
+						"categories",
+						"multiple"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Category by Id- GET",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/categories/2",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"categories",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Categories by LIST- GET",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/categories/category-list",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"categories",
+						"category-list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Category by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3MjE1Mzc2MTAsImV4cCI6MTcyMjE0MjQxMH0.SKbSCx7Mx5MkRlLAMbsXqgjQklMn6drHYvseaSIqHKGogeXOHpUFnCOprF2gzuz9",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"KLIM\",\r\n    \"description\": \"This is KLIM Library\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/categories/11",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"categories",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Category by id- DELETE",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3MjEwMjYxODksImV4cCI6MTcyMTYzMDk4OX0.dh6YNVUl_2uPFUqbPH9Uf8HzcQOdX_TgYNQ8XYXySEuhdVok669kTzv6aaRh2xC4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/categories/5",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"categories",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Posts By Category ID - GET",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/posts/category/5",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"posts",
+						"category",
+						"5"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
